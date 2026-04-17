@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="4;url=https://alphakiir.gumroad.com/l/screenforge">
+<meta http-equiv="refresh" content="8;url=https://alphakiir.gumroad.com/l/screenforge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScreenForge - Windowed mode fix for Metro games</title>
 <meta name="description" content="Force true windowed mode on Metro 2033 Redux, Last Light Redux, and Metro Exodus. $4.99 on Gumroad.">
@@ -20,7 +20,7 @@
     line-height: 1.6;
   }
   .container {
-    max-width: 600px;
+    max-width: 650px;
     width: 100%;
     background: rgba(30, 42, 62, 0.7);
     backdrop-filter: blur(10px);
@@ -29,6 +29,23 @@
     padding: 50px 40px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .lang-selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(15, 20, 30, 0.8);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    color: #e6edf3;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-selector:focus {
+    outline: 2px solid #58a6ff;
   }
   .logo {
     width: 100px;
@@ -61,30 +78,38 @@
   .features {
     text-align: left;
     margin: 30px 0;
-    padding: 20px;
+    padding: 20px 25px;
     background: rgba(15, 20, 30, 0.5);
     border-radius: 12px;
   }
   .features li {
     list-style: none;
-    padding: 8px 0;
+    padding: 10px 0;
     font-size: 15px;
     color: #c9d1d9;
+    border-bottom: 1px solid rgba(88,166,255,0.08);
   }
+  .features li:last-child { border-bottom: none; }
   .features li::before {
-    content: "v ";
+    content: "\2713 ";
     color: #2ecc71;
     font-weight: bold;
-    margin-right: 8px;
+    margin-right: 10px;
   }
   .price-tag {
     display: inline-block;
     background: #2ecc71;
     color: white;
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 30px;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .price-subtitle {
+    display: block;
+    font-size: 13px;
+    color: #8b9baa;
     margin-bottom: 20px;
   }
   .cta-button {
@@ -109,9 +134,7 @@
     font-size: 13px;
     color: #8b9baa;
   }
-  .redirect-notice strong {
-    color: #58a6ff;
-  }
+  .redirect-notice strong { color: #58a6ff; }
   .games {
     display: flex;
     flex-wrap: wrap;
@@ -131,45 +154,215 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
   }
-  .dot {
-    display: inline-block;
-    animation: pulse 1.5s infinite;
+  .dot { display: inline-block; animation: pulse 1.5s infinite; }
+  @media (max-width: 600px) {
+    .container { padding: 30px 20px; }
+    h1 { font-size: 32px; }
+    .lang-selector { top: 10px; right: 10px; font-size: 11px; padding: 6px 10px; }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
+  <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
+    <option value="en">EN English</option>
+    <option value="fr">FR Francais</option>
+    <option value="es">ES Espanol</option>
+    <option value="de">DE Deutsch</option>
+    <option value="it">IT Italiano</option>
+    <option value="pt">PT Portugues</option>
+    <option value="ru">RU Russkij</option>
+    <option value="pl">PL Polski</option>
+  </select>
+
   <div class="logo">SF</div>
   <h1>ScreenForge</h1>
-  <div class="subtitle">Force true windowed mode on Metro games</div>
+  <div class="subtitle" id="subtitle">Force true windowed mode on Metro games</div>
+
   <div class="games">
     <span class="game-tag">Metro 2033 Redux</span>
     <span class="game-tag">Last Light Redux</span>
     <span class="game-tag">Metro Exodus</span>
   </div>
+
   <ul class="features">
-    <li>Forces true windowed mode (not just borderless)</li>
-    <li>Works on Metro Exodus (DX11 swap + cfg lockdown)</li>
-    <li>Custom resolution, auto-center, optional borderless</li>
-    <li>Auto-detects Steam install (multi-library support)</li>
-    <li>Free lifetime updates - new games added regularly</li>
-    <li>One-click reset if you want to revert</li>
+    <li id="feat1">Forces true windowed mode (not just borderless)</li>
+    <li id="feat2">Works on Metro Exodus (DX11 swap + cfg lockdown)</li>
+    <li id="feat3">Custom resolution, auto-center, optional borderless</li>
+    <li id="feat4">Auto-detects Steam install (multi-library support)</li>
+    <li id="feat5">Free lifetime updates - new games added regularly</li>
+    <li id="feat6">One-click reset if you want to revert</li>
   </ul>
-  <div class="price-tag">$4.99 one-time</div>
-  <br>
-  <a href="https://alphakiir.gumroad.com/l/screenforge" class="cta-button">
-    Get ScreenForge on Gumroad ></a>
+
+  <div class="price-tag">$4.99</div>
+  <span class="price-subtitle" id="priceSubtitle">One-time purchase - lifetime updates included</span>
+
+  <a href="https://alphakiir.gumroad.com/l/screenforge" class="cta-button" id="ctaBtn">
+    Get ScreenForge on Gumroad
+  </a>
+
   <div class="redirect-notice">
-    <strong>Auto-redirect<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></strong><br>
-    If nothing happens, <a href="https://alphakiir.gumroad.com/l/screenforge" style="color:#58a6ff;">click here</a>
+    <strong id="redirectText">Auto-redirect<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></strong><br>
+    <span id="clickText">If nothing happens,</span> <a href="https://alphakiir.gumroad.com/l/screenforge" style="color:#58a6ff;" id="clickHereLink">click here</a>
   </div>
 </div>
 
 <script>
-  setTimeout(function() {
-    window.location.href = "https://alphakiir.gumroad.com/l/screenforge";
-  }, 4000);
+const translations = {
+  en: {
+    subtitle: "Force true windowed mode on Metro games",
+    feat1: "Forces true windowed mode (not just borderless)",
+    feat2: "Works on Metro Exodus (DX11 swap + cfg lockdown)",
+    feat3: "Custom resolution, auto-center, optional borderless",
+    feat4: "Auto-detects Steam install (multi-library support)",
+    feat5: "Free lifetime updates - new games added regularly",
+    feat6: "One-click reset if you want to revert",
+    priceSubtitle: "One-time purchase - lifetime updates included",
+    cta: "Get ScreenForge on Gumroad",
+    redirect: "Auto-redirect",
+    click: "If nothing happens,",
+    clickHere: "click here"
+  },
+  fr: {
+    subtitle: "Forcer le vrai mode fenetre sur les jeux Metro",
+    feat1: "Force le vrai mode fenetre (pas juste sans bordures)",
+    feat2: "Fonctionne sur Metro Exodus (DX11 + cfg verrouille)",
+    feat3: "Resolution custom, centrage auto, sans bordures optionnel",
+    feat4: "Detection automatique Steam (multi-bibliotheques)",
+    feat5: "Mises a jour gratuites a vie - nouveaux jeux ajoutes",
+    feat6: "Reinitialisation en un clic si tu veux revenir en arriere",
+    priceSubtitle: "Achat unique - mises a jour a vie incluses",
+    cta: "Obtenir ScreenForge sur Gumroad",
+    redirect: "Redirection auto",
+    click: "Si rien ne se passe,",
+    clickHere: "clique ici"
+  },
+  es: {
+    subtitle: "Forzar modo ventana real en los juegos Metro",
+    feat1: "Fuerza el modo ventana real (no solo sin bordes)",
+    feat2: "Funciona en Metro Exodus (DX11 + cfg bloqueado)",
+    feat3: "Resolucion personalizada, auto-centrado, sin bordes opcional",
+    feat4: "Detecta Steam automaticamente (multi-bibliotecas)",
+    feat5: "Actualizaciones gratuitas de por vida - nuevos juegos",
+    feat6: "Restablecimiento de un clic si quieres revertir",
+    priceSubtitle: "Compra unica - actualizaciones de por vida incluidas",
+    cta: "Consigue ScreenForge en Gumroad",
+    redirect: "Redireccion automatica",
+    click: "Si nada pasa,",
+    clickHere: "haz clic aqui"
+  },
+  de: {
+    subtitle: "Echten Fenstermodus auf Metro-Spielen erzwingen",
+    feat1: "Erzwingt echten Fenstermodus (nicht nur randlos)",
+    feat2: "Funktioniert mit Metro Exodus (DX11 + cfg gesperrt)",
+    feat3: "Eigene Auflosung, Auto-Zentrierung, optional randlos",
+    feat4: "Automatische Steam-Erkennung (Multi-Bibliothek)",
+    feat5: "Kostenlose Updates auf Lebenszeit - neue Spiele",
+    feat6: "Ein-Klick-Zurucksetzen wenn du zuruck willst",
+    priceSubtitle: "Einmaliger Kauf - lebenslange Updates inklusive",
+    cta: "ScreenForge auf Gumroad holen",
+    redirect: "Automatische Weiterleitung",
+    click: "Wenn nichts passiert,",
+    clickHere: "hier klicken"
+  },
+  it: {
+    subtitle: "Forza la modalita finestra vera sui giochi Metro",
+    feat1: "Forza la modalita finestra vera (non solo senza bordi)",
+    feat2: "Funziona su Metro Exodus (DX11 + cfg bloccato)",
+    feat3: "Risoluzione personalizzata, auto-centro, senza bordi opzionale",
+    feat4: "Rilevamento automatico di Steam (multi-libreria)",
+    feat5: "Aggiornamenti gratuiti a vita - nuovi giochi aggiunti",
+    feat6: "Reset con un clic se vuoi tornare indietro",
+    priceSubtitle: "Acquisto unico - aggiornamenti a vita inclusi",
+    cta: "Ottieni ScreenForge su Gumroad",
+    redirect: "Reindirizzamento automatico",
+    click: "Se non succede nulla,",
+    clickHere: "clicca qui"
+  },
+  pt: {
+    subtitle: "Forca o verdadeiro modo janela nos jogos Metro",
+    feat1: "Forca o verdadeiro modo janela (nao apenas sem bordas)",
+    feat2: "Funciona no Metro Exodus (DX11 + cfg bloqueado)",
+    feat3: "Resolucao personalizada, auto-centro, sem bordas opcional",
+    feat4: "Deteccao automatica do Steam (multi-bibliotecas)",
+    feat5: "Atualizacoes gratuitas para sempre - novos jogos",
+    feat6: "Reset com um clique se quiser reverter",
+    priceSubtitle: "Compra unica - atualizacoes vitalicias incluidas",
+    cta: "Obter ScreenForge no Gumroad",
+    redirect: "Redirecionamento automatico",
+    click: "Se nada acontecer,",
+    clickHere: "clique aqui"
+  },
+  ru: {
+    subtitle: "Nastoyashchiy okonnyy rezhim v igrah Metro",
+    feat1: "Nastoyashchiy okonnyy rezhim (ne tolko bez ramok)",
+    feat2: "Rabotaet v Metro Exodus (DX11 + zaschita cfg)",
+    feat3: "Svoe razreshenie, avto-centr, opcionalno bez ramok",
+    feat4: "Avtoobnaruzhenie Steam (multi-biblioteki)",
+    feat5: "Besplatnye obnovleniya - novye igry regulyarno",
+    feat6: "Sbros v odin klik esli zahotite otmenit",
+    priceSubtitle: "Odnorazovaya pokupka - obnovleniya navsegda",
+    cta: "Kupit ScreenForge na Gumroad",
+    redirect: "Avtomaticheskoe perenapravlenie",
+    click: "Esli nichego ne proishodit,",
+    clickHere: "nazhmite zdes"
+  },
+  pl: {
+    subtitle: "Wymus prawdziwy tryb okienkowy w grach Metro",
+    feat1: "Wymusza prawdziwy tryb okienkowy (nie tylko bez ramek)",
+    feat2: "Dziala w Metro Exodus (DX11 + blokada cfg)",
+    feat3: "Wlasna rozdzielczosc, auto-centrowanie, bez ramek",
+    feat4: "Auto-wykrywanie Steam (wiele bibliotek)",
+    feat5: "Darmowe aktualizacje na zawsze - nowe gry",
+    feat6: "Reset jednym klikiem jesli chcesz cofnac",
+    priceSubtitle: "Jednorazowy zakup - aktualizacje na zawsze",
+    cta: "Kup ScreenForge na Gumroad",
+    redirect: "Automatyczne przekierowanie",
+    click: "Jesli nic sie nie dzieje,",
+    clickHere: "kliknij tutaj"
+  }
+};
+
+function changeLanguage(lang) {
+  if (!translations[lang]) lang = 'en';
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.getElementById('subtitle').textContent = t.subtitle;
+  document.getElementById('feat1').textContent = t.feat1;
+  document.getElementById('feat2').textContent = t.feat2;
+  document.getElementById('feat3').textContent = t.feat3;
+  document.getElementById('feat4').textContent = t.feat4;
+  document.getElementById('feat5').textContent = t.feat5;
+  document.getElementById('feat6').textContent = t.feat6;
+  document.getElementById('priceSubtitle').textContent = t.priceSubtitle;
+  document.getElementById('ctaBtn').textContent = t.cta;
+  document.getElementById('redirectText').innerHTML = t.redirect + '<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
+  document.getElementById('clickText').textContent = t.click;
+  document.getElementById('clickHereLink').textContent = t.clickHere;
+  document.getElementById('langSelect').value = lang;
+  try { localStorage.setItem('sf_lang', lang); } catch(e) {}
+}
+
+// Auto-detection du pays/langue
+function detectLanguage() {
+  try {
+    const saved = localStorage.getItem('sf_lang');
+    if (saved && translations[saved]) return saved;
+  } catch(e) {}
+  const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+  const map = { fr: 'fr', es: 'es', de: 'de', it: 'it', pt: 'pt', ru: 'ru', pl: 'pl', en: 'en' };
+  return map[browserLang] || 'en';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  changeLanguage(detectLanguage());
+});
+
+// Redirection auto apres 8 secondes (laisser le temps de lire)
+setTimeout(function() {
+  window.location.href = "https://alphakiir.gumroad.com/l/screenforge";
+}, 8000);
 </script>
 
 </body>
