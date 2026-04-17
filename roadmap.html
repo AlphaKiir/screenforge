@@ -14,33 +14,18 @@
     padding: 30px 20px;
     line-height: 1.65;
   }
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-  }
+  .container { max-width: 800px; margin: 0 auto; position: relative; }
   .lang-dropdown {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: absolute; top: 10px; right: 10px;
     background: rgba(15, 20, 30, 0.9);
-    border: 1px solid #58a6ff;
-    color: #e6edf3;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    cursor: pointer;
-    z-index: 10;
+    border: 1px solid #58a6ff; color: #e6edf3;
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; cursor: pointer; z-index: 10;
     font-family: inherit;
   }
-  .header {
-    text-align: center;
-    padding: 40px 20px 30px;
-    margin-bottom: 30px;
-  }
+  .header { text-align: center; padding: 40px 20px 30px; margin-bottom: 30px; }
   .logo {
-    width: 80px; height: 80px;
-    margin: 0 auto 20px;
+    width: 80px; height: 80px; margin: 0 auto 20px;
     background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
     border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
@@ -57,9 +42,7 @@
     background: rgba(30, 42, 62, 0.6);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(88, 166, 255, 0.15);
-    border-radius: 14px;
-    padding: 28px;
-    margin-bottom: 20px;
+    border-radius: 14px; padding: 28px; margin-bottom: 20px;
   }
   .section-title {
     font-size: 22px; font-weight: 700; margin-bottom: 18px;
@@ -71,41 +54,44 @@
   }
   .status-live { background: #2ecc71; color: white; }
   .status-next { background: #f39c12; color: white; }
-  .status-soon { background: #58a6ff; color: white; }
-  .status-consider { background: #8b9baa; color: white; }
   .game-item {
     background: rgba(15, 20, 30, 0.6);
-    padding: 14px 18px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    padding: 14px 18px; border-radius: 10px; margin-bottom: 10px;
     border-left: 3px solid #58a6ff;
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 10px;
   }
   .game-item.live { border-left-color: #2ecc71; }
   .game-item.next { border-left-color: #f39c12; }
-  .game-item.consider { border-left-color: #8b9baa; opacity: 0.85; }
   .game-name { font-weight: 600; font-size: 15px; }
   .game-note { font-size: 13px; color: #8b9baa; }
+  .suggest-box {
+    background: linear-gradient(135deg, rgba(88,166,255,0.15) 0%, rgba(46,204,113,0.15) 100%);
+    border: 1px solid rgba(88,166,255,0.3);
+    padding: 35px 28px; border-radius: 14px; text-align: center;
+    margin-bottom: 20px;
+  }
+  .suggest-box h3 { font-size: 24px; margin-bottom: 12px; color: #58a6ff; }
+  .suggest-box p { color: #c9d1d9; margin-bottom: 18px; font-size: 15px; }
+  .suggest-box .highlight {
+    display: inline-block;
+    background: rgba(46,204,113,0.2); color: #2ecc71;
+    padding: 6px 14px; border-radius: 20px;
+    font-weight: 600; font-size: 14px;
+    margin-top: 10px;
+  }
   .cta-box {
     background: linear-gradient(135deg, rgba(88,166,255,0.15) 0%, rgba(31,106,165,0.15) 100%);
     border: 1px solid rgba(88,166,255,0.3);
-    padding: 28px;
-    border-radius: 14px;
-    text-align: center;
-    margin-top: 30px;
+    padding: 28px; border-radius: 14px; text-align: center; margin-top: 30px;
   }
   .cta-box h3 { font-size: 22px; margin-bottom: 12px; color: #58a6ff; }
   .cta-box p { color: #c9d1d9; margin-bottom: 20px; font-size: 15px; }
   .btn {
     display: inline-block;
     background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 700;
-    margin: 6px;
+    color: white; padding: 14px 32px; border-radius: 30px;
+    text-decoration: none; font-weight: 700; margin: 6px;
     transition: all 0.3s;
     box-shadow: 0 6px 16px rgba(88,166,255,0.3);
   }
@@ -122,7 +108,7 @@
   }
   @media (max-width: 600px) {
     h1 { font-size: 30px; }
-    .section { padding: 20px; }
+    .section, .suggest-box { padding: 20px; }
     .lang-dropdown { top: 5px; right: 5px; font-size: 11px; padding: 6px 10px; }
   }
 </style>
@@ -187,55 +173,16 @@
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title">
-      <span class="status-badge status-soon" data-i18n="badge_soon">COMING SOON</span>
-      <span data-i18n="sec3_title">Planned</span>
-    </div>
-    <div class="game-item">
-      <span class="game-name">Control (Remedy)</span>
-      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
-    </div>
-    <div class="game-item">
-      <span class="game-name">Gears 5</span>
-      <span class="game-note" data-i18n="note_ue4">UE4 - GameUserSettings.ini fix</span>
-    </div>
-    <div class="game-item">
-      <span class="game-name">Far Cry 6</span>
-      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
-    </div>
-    <div class="game-item">
-      <span class="game-name">Kena: Bridge of Spirits</span>
-      <span class="game-note" data-i18n="note_ue4">UE4 - stuck borderless DX12</span>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">
-      <span class="status-badge status-consider" data-i18n="badge_consider">UNDER CONSIDERATION</span>
-      <span data-i18n="sec4_title">Being evaluated</span>
-    </div>
-    <div class="game-item consider">
-      <span class="game-name">Alien: Isolation</span>
-      <span class="game-note" data-i18n="note_misc">Fullscreen crash issues</span>
-    </div>
-    <div class="game-item consider">
-      <span class="game-name">Apex Legends</span>
-      <span class="game-note" data-i18n="note_misc">Fullscreen instability</span>
-    </div>
-    <div class="game-item consider">
-      <span class="game-name">Days Gone</span>
-      <span class="game-note" data-i18n="note_misc">Ultrawide stretched</span>
-    </div>
-    <div class="game-item consider">
-      <span class="game-name">Warhammer 2 Total War</span>
-      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
-    </div>
+  <div class="suggest-box">
+    <h3 data-i18n="suggest_title">Know a game with windowed mode issues?</h3>
+    <p data-i18n="suggest_desc">I prioritize new games based on real player demand. If you run into a game stuck in borderless fullscreen or that refuses to go windowed, let me know and I'll look into it.</p>
+    <p data-i18n="suggest_how"><strong>How to suggest a game:</strong> send me a message via the contact form on my Gumroad page, or find the Steam discussion thread where I posted about ScreenForge.</p>
+    <div class="highlight" data-i18n="suggest_waiting">Waiting for your feedback!</div>
   </div>
 
   <div class="cta-box">
-    <h3 data-i18n="cta_title">Have a game to suggest?</h3>
-    <p data-i18n="cta_desc">I prioritize games based on real player demand. If a game you play has windowed mode issues, let me know and I'll look into it.</p>
+    <h3 data-i18n="cta_title">Ready to try ScreenForge?</h3>
+    <p data-i18n="cta_desc">One-time purchase. All future supported games land in your ScreenForge automatically via built-in auto-update. No re-buy, ever.</p>
     <a href="https://alphakiir.gumroad.com/l/screenforge" class="btn" data-i18n="cta_buy">Get ScreenForge - $4.99</a>
     <a href="index.html" class="btn btn-secondary" data-i18n="cta_back">Back to home</a>
   </div>
@@ -249,16 +196,17 @@ const T = {
   en: {
     back: "< Back to ScreenForge",
     subtitle: "Supported games and what's coming next",
-    badge_live: "LIVE", badge_next: "COMING NEXT", badge_soon: "COMING SOON", badge_consider: "UNDER CONSIDERATION",
-    sec1_title: "Currently supported", sec2_title: "Active development", sec3_title: "Planned", sec4_title: "Being evaluated",
+    badge_live: "LIVE", badge_next: "COMING NEXT",
+    sec1_title: "Currently supported", sec2_title: "Active development",
     note_4a: "4A Engine - windowed mode + custom resolution",
     note_exodus: "DX11 swap + cfg lockdown (exclusive solution)",
     note_re: "RE Engine - DX12 forced borderless",
-    note_dx12: "DX12 forced borderless",
-    note_ue4: "UE4 engine fix",
-    note_misc: "Windowed/fullscreen issues",
-    cta_title: "Have a game to suggest?",
-    cta_desc: "I prioritize games based on real player demand. If a game you play has windowed mode issues, let me know and I'll look into it.",
+    suggest_title: "Know a game with windowed mode issues?",
+    suggest_desc: "I prioritize new games based on real player demand. If you run into a game stuck in borderless fullscreen or that refuses to go windowed, let me know and I'll look into it.",
+    suggest_how: "How to suggest a game: send me a message via the contact form on my Gumroad page, or find the Steam discussion thread where I posted about ScreenForge.",
+    suggest_waiting: "Waiting for your feedback!",
+    cta_title: "Ready to try ScreenForge?",
+    cta_desc: "One-time purchase. All future supported games land in your ScreenForge automatically via built-in auto-update. No re-buy, ever.",
     cta_buy: "Get ScreenForge - $4.99",
     cta_back: "Back to home",
     update_note: "Owners get all future games automatically via built-in auto-update. One purchase, lifetime updates."
@@ -266,33 +214,35 @@ const T = {
   fr: {
     back: "< Retour a ScreenForge",
     subtitle: "Jeux supportes et ce qui arrive bientot",
-    badge_live: "EN LIGNE", badge_next: "BIENTOT", badge_soon: "PREVU", badge_consider: "A L'ETUDE",
-    sec1_title: "Actuellement supportes", sec2_title: "Developpement actif", sec3_title: "Prevu", sec4_title: "En evaluation",
+    badge_live: "EN LIGNE", badge_next: "BIENTOT",
+    sec1_title: "Actuellement supportes", sec2_title: "Developpement actif",
     note_4a: "Moteur 4A - mode fenetre + resolution custom",
     note_exodus: "Forcage DX11 + cfg verrouille (solution exclusive)",
     note_re: "RE Engine - DX12 force borderless",
-    note_dx12: "DX12 force borderless",
-    note_ue4: "Fix moteur UE4",
-    note_misc: "Problemes fenetre/plein ecran",
-    cta_title: "Un jeu a suggerer ?",
-    cta_desc: "Je priorise les jeux selon la demande reelle des joueurs. Si un jeu que tu joues a des soucis de mode fenetre, dis-le moi et je regarde.",
+    suggest_title: "Tu connais un jeu avec des soucis de mode fenetre ?",
+    suggest_desc: "Je priorise les nouveaux jeux selon la demande reelle des joueurs. Si tu tombes sur un jeu bloque en borderless ou qui refuse le mode fenetre, dis-le moi et je regarde.",
+    suggest_how: "Comment suggerer un jeu : envoie-moi un message via le formulaire de contact sur ma page Gumroad, ou trouve le thread Steam ou j'ai poste sur ScreenForge.",
+    suggest_waiting: "J'attends tes retours !",
+    cta_title: "Pret a essayer ScreenForge ?",
+    cta_desc: "Achat unique. Tous les futurs jeux supportes arrivent automatiquement dans ton ScreenForge via l'auto-update integre. Pas de rachat, jamais.",
     cta_buy: "Obtenir ScreenForge - 4,99$",
     cta_back: "Retour a l'accueil",
-    update_note: "Les proprietaires recoivent tous les futurs jeux automatiquement via l'auto-update integre. Un seul achat, mises a jour a vie."
+    update_note: "Les proprietaires recoivent tous les futurs jeux automatiquement. Un seul achat, mises a jour a vie."
   },
   es: {
     back: "< Volver a ScreenForge",
     subtitle: "Juegos compatibles y lo que viene",
-    badge_live: "EN VIVO", badge_next: "PROXIMO", badge_soon: "PLANIFICADO", badge_consider: "EN EVALUACION",
-    sec1_title: "Actualmente compatibles", sec2_title: "Desarrollo activo", sec3_title: "Planificado", sec4_title: "En evaluacion",
+    badge_live: "EN VIVO", badge_next: "PROXIMO",
+    sec1_title: "Actualmente compatibles", sec2_title: "Desarrollo activo",
     note_4a: "Motor 4A - modo ventana + resolucion personalizada",
     note_exodus: "Forzar DX11 + cfg bloqueado (solucion exclusiva)",
     note_re: "RE Engine - DX12 fuerza borderless",
-    note_dx12: "DX12 fuerza borderless",
-    note_ue4: "Arreglo motor UE4",
-    note_misc: "Problemas ventana/pantalla completa",
-    cta_title: "Quieres sugerir un juego?",
-    cta_desc: "Priorizo juegos segun la demanda real. Si un juego que juegas tiene problemas de modo ventana, dimelo y lo revisare.",
+    suggest_title: "Conoces un juego con problemas de modo ventana?",
+    suggest_desc: "Priorizo nuevos juegos segun la demanda real de los jugadores. Si encuentras un juego atascado en borderless o que rechaza el modo ventana, dimelo y lo revisare.",
+    suggest_how: "Como sugerir un juego: envia un mensaje via el formulario de contacto en mi pagina Gumroad, o encuentra el hilo de discusion Steam donde publique sobre ScreenForge.",
+    suggest_waiting: "Esperando tus comentarios!",
+    cta_title: "Listo para probar ScreenForge?",
+    cta_desc: "Compra unica. Todos los juegos futuros llegan automaticamente a tu ScreenForge via auto-actualizacion integrada. Sin recompra, nunca.",
     cta_buy: "Consigue ScreenForge - $4.99",
     cta_back: "Volver al inicio",
     update_note: "Los propietarios reciben todos los juegos futuros automaticamente. Una compra, actualizaciones de por vida."
@@ -300,16 +250,17 @@ const T = {
   de: {
     back: "< Zuruck zu ScreenForge",
     subtitle: "Unterstutzte Spiele und was kommt",
-    badge_live: "LIVE", badge_next: "ALS NACHSTES", badge_soon: "GEPLANT", badge_consider: "IN PRUFUNG",
-    sec1_title: "Aktuell unterstutzt", sec2_title: "Aktive Entwicklung", sec3_title: "Geplant", sec4_title: "In Bewertung",
+    badge_live: "LIVE", badge_next: "ALS NACHSTES",
+    sec1_title: "Aktuell unterstutzt", sec2_title: "Aktive Entwicklung",
     note_4a: "4A Engine - Fenstermodus + eigene Auflosung",
     note_exodus: "DX11 erzwungen + cfg gesperrt (exklusiv)",
     note_re: "RE Engine - DX12 erzwungenes Borderless",
-    note_dx12: "DX12 erzwungenes Borderless",
-    note_ue4: "UE4 Engine Fix",
-    note_misc: "Fenster/Vollbild Probleme",
-    cta_title: "Hast du einen Spielvorschlag?",
-    cta_desc: "Ich priorisiere Spiele nach realer Spielernachfrage. Wenn ein Spiel Fenstermodus-Probleme hat, lass es mich wissen.",
+    suggest_title: "Kennst du ein Spiel mit Fenstermodus-Problemen?",
+    suggest_desc: "Ich priorisiere neue Spiele nach realer Spielernachfrage. Wenn du auf ein Spiel stosst, das im Borderless hangt oder Fenstermodus verweigert, lass es mich wissen.",
+    suggest_how: "Spiel vorschlagen: Sende mir eine Nachricht uber das Kontaktformular meiner Gumroad-Seite, oder finde den Steam-Diskussionsthread wo ich uber ScreenForge gepostet habe.",
+    suggest_waiting: "Warte auf dein Feedback!",
+    cta_title: "Bereit ScreenForge auszuprobieren?",
+    cta_desc: "Einmaliger Kauf. Alle zukunftigen Spiele landen automatisch in deinem ScreenForge via integriertem Auto-Update. Kein erneuter Kauf, niemals.",
     cta_buy: "ScreenForge holen - $4.99",
     cta_back: "Zuruck zur Startseite",
     update_note: "Besitzer erhalten alle zukunftigen Spiele automatisch. Ein Kauf, lebenslange Updates."
@@ -317,16 +268,17 @@ const T = {
   it: {
     back: "< Torna a ScreenForge",
     subtitle: "Giochi supportati e cosa arriva",
-    badge_live: "LIVE", badge_next: "PROSSIMO", badge_soon: "PIANIFICATO", badge_consider: "IN VALUTAZIONE",
-    sec1_title: "Attualmente supportati", sec2_title: "Sviluppo attivo", sec3_title: "Pianificato", sec4_title: "In valutazione",
+    badge_live: "LIVE", badge_next: "PROSSIMO",
+    sec1_title: "Attualmente supportati", sec2_title: "Sviluppo attivo",
     note_4a: "Motore 4A - modalita finestra + risoluzione personalizzata",
     note_exodus: "Forzare DX11 + cfg bloccato (soluzione esclusiva)",
     note_re: "RE Engine - DX12 forza borderless",
-    note_dx12: "DX12 forza borderless",
-    note_ue4: "Fix motore UE4",
-    note_misc: "Problemi finestra/schermo intero",
-    cta_title: "Hai un gioco da suggerire?",
-    cta_desc: "Dai priorita ai giochi in base alla domanda reale. Se un gioco ha problemi di modalita finestra, dimmelo e lo guardero.",
+    suggest_title: "Conosci un gioco con problemi di modalita finestra?",
+    suggest_desc: "Dai priorita a nuovi giochi in base alla domanda reale. Se trovi un gioco bloccato in borderless o che rifiuta la modalita finestra, dimmelo e lo guardero.",
+    suggest_how: "Come suggerire un gioco: inviami un messaggio tramite il modulo di contatto sulla mia pagina Gumroad, o trova la discussione Steam dove ho postato su ScreenForge.",
+    suggest_waiting: "Aspetto i tuoi feedback!",
+    cta_title: "Pronto a provare ScreenForge?",
+    cta_desc: "Acquisto unico. Tutti i giochi futuri supportati arrivano automaticamente nel tuo ScreenForge via auto-aggiornamento integrato. Nessun riacquisto, mai.",
     cta_buy: "Ottieni ScreenForge - $4.99",
     cta_back: "Torna alla home",
     update_note: "I proprietari ricevono tutti i giochi futuri automaticamente. Un acquisto, aggiornamenti a vita."
@@ -334,16 +286,17 @@ const T = {
   pt: {
     back: "< Voltar ao ScreenForge",
     subtitle: "Jogos suportados e o que vem por ai",
-    badge_live: "NO AR", badge_next: "PROXIMO", badge_soon: "PLANEJADO", badge_consider: "EM AVALIACAO",
-    sec1_title: "Atualmente suportados", sec2_title: "Desenvolvimento ativo", sec3_title: "Planejado", sec4_title: "Em avaliacao",
+    badge_live: "NO AR", badge_next: "PROXIMO",
+    sec1_title: "Atualmente suportados", sec2_title: "Desenvolvimento ativo",
     note_4a: "Motor 4A - modo janela + resolucao personalizada",
     note_exodus: "Forcar DX11 + cfg bloqueado (exclusivo)",
     note_re: "RE Engine - DX12 forca borderless",
-    note_dx12: "DX12 forca borderless",
-    note_ue4: "Correcao motor UE4",
-    note_misc: "Problemas janela/tela cheia",
-    cta_title: "Tem um jogo para sugerir?",
-    cta_desc: "Priorizo jogos com base na demanda real. Se um jogo tem problemas de modo janela, me avise e vou olhar.",
+    suggest_title: "Conhece um jogo com problemas de modo janela?",
+    suggest_desc: "Priorizo novos jogos com base na demanda real dos jogadores. Se voce encontrar um jogo preso em borderless ou que recusa o modo janela, me avise e vou olhar.",
+    suggest_how: "Como sugerir um jogo: envie uma mensagem via o formulario de contato na minha pagina Gumroad, ou encontre o thread Steam onde postei sobre ScreenForge.",
+    suggest_waiting: "Esperando seus comentarios!",
+    cta_title: "Pronto para experimentar ScreenForge?",
+    cta_desc: "Compra unica. Todos os jogos futuros suportados chegam automaticamente ao seu ScreenForge via auto-atualizacao integrada. Sem recompra, nunca.",
     cta_buy: "Obter ScreenForge - $4.99",
     cta_back: "Voltar ao inicio",
     update_note: "Proprietarios recebem todos os jogos futuros automaticamente. Uma compra, atualizacoes vitalicias."
@@ -351,16 +304,17 @@ const T = {
   ru: {
     back: "< Nazad k ScreenForge",
     subtitle: "Podderzhivaemye igry i chto dalshe",
-    badge_live: "V ETERE", badge_next: "SKORO", badge_soon: "PLANIRUETSYA", badge_consider: "RASSMATRIVAETSYA",
-    sec1_title: "V nastoyashchee vremya podderzhivayutsya", sec2_title: "Aktivnaya razrabotka", sec3_title: "Planiruetsya", sec4_title: "V otsenke",
+    badge_live: "V ETERE", badge_next: "SKORO",
+    sec1_title: "V nastoyashchee vremya podderzhivayutsya", sec2_title: "Aktivnaya razrabotka",
     note_4a: "4A Engine - okonnyj rezhim + razreshenie",
     note_exodus: "DX11 + blokirovka cfg (eksklyuziv)",
     note_re: "RE Engine - DX12 prinuzhdaet borderless",
-    note_dx12: "DX12 prinuzhdaet borderless",
-    note_ue4: "UE4 fix",
-    note_misc: "Problemy okno/polnyj ekran",
-    cta_title: "Est igra dlya predlozheniya?",
-    cta_desc: "Ya rasstavlyayu prioritety na osnove realnogo sprosa igrokov. Esli u igry est problemy s okonnym rezhimom, skazhite mne.",
+    suggest_title: "Znaete igru s problemami okonnogo rezhima?",
+    suggest_desc: "Ya rasstavlyayu prioritety po realnomu sprosu igrokov. Esli natknetes na igru zastryavshuyu v borderless ili otkazyvayushchuyusya v okonnyj rezhim, skazhite mne i ya posmotryu.",
+    suggest_how: "Kak predlozhit igru: otprav'te mne soobshchenie cherez formu kontaktov na moej stranitse Gumroad, ili najdite obsuzhdenie Steam gde ya postil o ScreenForge.",
+    suggest_waiting: "Zhdu vashih otzyvov!",
+    cta_title: "Gotovy poprobovat ScreenForge?",
+    cta_desc: "Odnorazovaya pokupka. Vse budushchie podderzhivaemye igry postupayut avtomaticheski v vash ScreenForge cherez vstroennoe avtoobnovlenie. Nikakih povtornyh pokupok.",
     cta_buy: "Poluchit ScreenForge - $4.99",
     cta_back: "Na glavnuyu",
     update_note: "Vladeltsy poluchayut vse budushchie igry avtomaticheski. Odna pokupka, obnovleniya navsegda."
@@ -368,16 +322,17 @@ const T = {
   pl: {
     back: "< Powrot do ScreenForge",
     subtitle: "Obslugiwane gry i co dalej",
-    badge_live: "NA ZYWO", badge_next: "NASTEPNE", badge_soon: "PLANOWANE", badge_consider: "W OCENIE",
-    sec1_title: "Obecnie obslugiwane", sec2_title: "Aktywny rozwoj", sec3_title: "Planowane", sec4_title: "W ocenie",
+    badge_live: "NA ZYWO", badge_next: "NASTEPNE",
+    sec1_title: "Obecnie obslugiwane", sec2_title: "Aktywny rozwoj",
     note_4a: "Silnik 4A - tryb okienkowy + rozdzielczosc",
     note_exodus: "Wymuszenie DX11 + blokada cfg (ekskluzywne)",
     note_re: "RE Engine - DX12 wymusza borderless",
-    note_dx12: "DX12 wymusza borderless",
-    note_ue4: "Poprawka silnika UE4",
-    note_misc: "Problemy okno/pelny ekran",
-    cta_title: "Masz gre do zasugerowania?",
-    cta_desc: "Priorytetyzuje gry na podstawie realnego popytu graczy. Jesli gra ma problemy z trybem okienkowym, daj mi znac.",
+    suggest_title: "Znasz gre z problemami trybu okienkowego?",
+    suggest_desc: "Priorytetyzuje nowe gry na podstawie realnego popytu graczy. Jesli natkniesz sie na gre zablokowana w borderless lub odmawiajaca trybu okienkowego, daj mi znac.",
+    suggest_how: "Jak zasugerowac gre: wyslij mi wiadomosc przez formularz kontaktowy na mojej stronie Gumroad, lub znajdz watek dyskusji Steam, w ktorym pisalem o ScreenForge.",
+    suggest_waiting: "Czekam na twoje opinie!",
+    cta_title: "Gotowy wyprobowac ScreenForge?",
+    cta_desc: "Jednorazowy zakup. Wszystkie przyszle obslugiwane gry trafiaja automatycznie do twojego ScreenForge przez wbudowana auto-aktualizacje. Bez ponownego zakupu.",
     cta_buy: "Kup ScreenForge - $4.99",
     cta_back: "Powrot do glownej",
     update_note: "Wlasciciele otrzymuja wszystkie przyszle gry automatycznie. Jeden zakup, aktualizacje na zawsze."
