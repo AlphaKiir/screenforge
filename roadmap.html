@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScreenForge - Roadmap</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0f141e 0%, #1a2942 100%);
+    color: #e6edf3;
+    min-height: 100vh;
+    padding: 30px 20px;
+    line-height: 1.65;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .lang-dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(15, 20, 30, 0.9);
+    border: 1px solid #58a6ff;
+    color: #e6edf3;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    z-index: 10;
+    font-family: inherit;
+  }
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    margin-bottom: 30px;
+  }
+  .logo {
+    width: 80px; height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; font-weight: bold; color: white;
+    box-shadow: 0 10px 30px rgba(88,166,255,0.3);
+  }
+  h1 {
+    font-size: 42px; font-weight: 700; margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #58a6ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .subtitle { font-size: 17px; color: #8b9baa; }
+  .section {
+    background: rgba(30, 42, 62, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(88, 166, 255, 0.15);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 700; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .status-badge {
+    font-size: 12px; padding: 5px 12px; border-radius: 20px;
+    font-weight: 700; letter-spacing: 0.5px;
+  }
+  .status-live { background: #2ecc71; color: white; }
+  .status-next { background: #f39c12; color: white; }
+  .status-soon { background: #58a6ff; color: white; }
+  .status-consider { background: #8b9baa; color: white; }
+  .game-item {
+    background: rgba(15, 20, 30, 0.6);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid #58a6ff;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .game-item.live { border-left-color: #2ecc71; }
+  .game-item.next { border-left-color: #f39c12; }
+  .game-item.consider { border-left-color: #8b9baa; opacity: 0.85; }
+  .game-name { font-weight: 600; font-size: 15px; }
+  .game-note { font-size: 13px; color: #8b9baa; }
+  .cta-box {
+    background: linear-gradient(135deg, rgba(88,166,255,0.15) 0%, rgba(31,106,165,0.15) 100%);
+    border: 1px solid rgba(88,166,255,0.3);
+    padding: 28px;
+    border-radius: 14px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .cta-box h3 { font-size: 22px; margin-bottom: 12px; color: #58a6ff; }
+  .cta-box p { color: #c9d1d9; margin-bottom: 20px; font-size: 15px; }
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 6px;
+    transition: all 0.3s;
+    box-shadow: 0 6px 16px rgba(88,166,255,0.3);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(88,166,255,0.5); }
+  .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+  .back-link {
+    color: #58a6ff; text-decoration: none; font-size: 14px;
+    display: inline-block; margin-bottom: 20px;
+  }
+  .back-link:hover { text-decoration: underline; }
+  .update-note {
+    text-align: center; color: #8b9baa; font-size: 13px;
+    margin-top: 20px; font-style: italic;
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    .section { padding: 20px; }
+    .lang-dropdown { top: 5px; right: 5px; font-size: 11px; padding: 6px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <select class="lang-dropdown" id="langSelect" onchange="changeLanguage(this.value)">
+    <option value="en">EN English</option>
+    <option value="fr">FR Francais</option>
+    <option value="es">ES Espanol</option>
+    <option value="de">DE Deutsch</option>
+    <option value="it">IT Italiano</option>
+    <option value="pt">PT Portugues</option>
+    <option value="ru">RU Russkij</option>
+    <option value="pl">PL Polski</option>
+  </select>
+
+  <a href="index.html" class="back-link" data-i18n="back">&lt; Back to ScreenForge</a>
+
+  <div class="header">
+    <div class="logo">SF</div>
+    <h1>Roadmap</h1>
+    <div class="subtitle" data-i18n="subtitle">Supported games and what's coming next</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="status-badge status-live" data-i18n="badge_live">LIVE</span>
+      <span data-i18n="sec1_title">Currently supported</span>
+    </div>
+    <div class="game-item live">
+      <span class="game-name">Metro 2033 Redux</span>
+      <span class="game-note" data-i18n="note_4a">4A Engine - windowed mode + custom resolution</span>
+    </div>
+    <div class="game-item live">
+      <span class="game-name">Metro Last Light Redux</span>
+      <span class="game-note" data-i18n="note_4a">4A Engine - windowed mode + custom resolution</span>
+    </div>
+    <div class="game-item live">
+      <span class="game-name">Metro Exodus</span>
+      <span class="game-note" data-i18n="note_exodus">DX11 swap + cfg lockdown (exclusive solution)</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="status-badge status-next" data-i18n="badge_next">COMING NEXT</span>
+      <span data-i18n="sec2_title">Active development</span>
+    </div>
+    <div class="game-item next">
+      <span class="game-name">Resident Evil 4 Remake</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
+    </div>
+    <div class="game-item next">
+      <span class="game-name">Resident Evil 2 Remake</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
+    </div>
+    <div class="game-item next">
+      <span class="game-name">Resident Evil 3 Remake</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="status-badge status-soon" data-i18n="badge_soon">COMING SOON</span>
+      <span data-i18n="sec3_title">Planned</span>
+    </div>
+    <div class="game-item">
+      <span class="game-name">Control (Remedy)</span>
+      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
+    </div>
+    <div class="game-item">
+      <span class="game-name">Gears 5</span>
+      <span class="game-note" data-i18n="note_ue4">UE4 - GameUserSettings.ini fix</span>
+    </div>
+    <div class="game-item">
+      <span class="game-name">Far Cry 6</span>
+      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
+    </div>
+    <div class="game-item">
+      <span class="game-name">Kena: Bridge of Spirits</span>
+      <span class="game-note" data-i18n="note_ue4">UE4 - stuck borderless DX12</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="status-badge status-consider" data-i18n="badge_consider">UNDER CONSIDERATION</span>
+      <span data-i18n="sec4_title">Being evaluated</span>
+    </div>
+    <div class="game-item consider">
+      <span class="game-name">Alien: Isolation</span>
+      <span class="game-note" data-i18n="note_misc">Fullscreen crash issues</span>
+    </div>
+    <div class="game-item consider">
+      <span class="game-name">Apex Legends</span>
+      <span class="game-note" data-i18n="note_misc">Fullscreen instability</span>
+    </div>
+    <div class="game-item consider">
+      <span class="game-name">Days Gone</span>
+      <span class="game-note" data-i18n="note_misc">Ultrawide stretched</span>
+    </div>
+    <div class="game-item consider">
+      <span class="game-name">Warhammer 2 Total War</span>
+      <span class="game-note" data-i18n="note_dx12">DX12 forced borderless</span>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3 data-i18n="cta_title">Have a game to suggest?</h3>
+    <p data-i18n="cta_desc">I prioritize games based on real player demand. If a game you play has windowed mode issues, let me know and I'll look into it.</p>
+    <a href="https://alphakiir.gumroad.com/l/screenforge" class="btn" data-i18n="cta_buy">Get ScreenForge - $4.99</a>
+    <a href="index.html" class="btn btn-secondary" data-i18n="cta_back">Back to home</a>
+  </div>
+
+  <div class="update-note" data-i18n="update_note">Owners get all future games automatically via built-in auto-update. One purchase, lifetime updates.</div>
+
+</div>
+
+<script>
+const T = {
+  en: {
+    back: "< Back to ScreenForge",
+    subtitle: "Supported games and what's coming next",
+    badge_live: "LIVE", badge_next: "COMING NEXT", badge_soon: "COMING SOON", badge_consider: "UNDER CONSIDERATION",
+    sec1_title: "Currently supported", sec2_title: "Active development", sec3_title: "Planned", sec4_title: "Being evaluated",
+    note_4a: "4A Engine - windowed mode + custom resolution",
+    note_exodus: "DX11 swap + cfg lockdown (exclusive solution)",
+    note_re: "RE Engine - DX12 forced borderless",
+    note_dx12: "DX12 forced borderless",
+    note_ue4: "UE4 engine fix",
+    note_misc: "Windowed/fullscreen issues",
+    cta_title: "Have a game to suggest?",
+    cta_desc: "I prioritize games based on real player demand. If a game you play has windowed mode issues, let me know and I'll look into it.",
+    cta_buy: "Get ScreenForge - $4.99",
+    cta_back: "Back to home",
+    update_note: "Owners get all future games automatically via built-in auto-update. One purchase, lifetime updates."
+  },
+  fr: {
+    back: "< Retour a ScreenForge",
+    subtitle: "Jeux supportes et ce qui arrive bientot",
+    badge_live: "EN LIGNE", badge_next: "BIENTOT", badge_soon: "PREVU", badge_consider: "A L'ETUDE",
+    sec1_title: "Actuellement supportes", sec2_title: "Developpement actif", sec3_title: "Prevu", sec4_title: "En evaluation",
+    note_4a: "Moteur 4A - mode fenetre + resolution custom",
+    note_exodus: "Forcage DX11 + cfg verrouille (solution exclusive)",
+    note_re: "RE Engine - DX12 force borderless",
+    note_dx12: "DX12 force borderless",
+    note_ue4: "Fix moteur UE4",
+    note_misc: "Problemes fenetre/plein ecran",
+    cta_title: "Un jeu a suggerer ?",
+    cta_desc: "Je priorise les jeux selon la demande reelle des joueurs. Si un jeu que tu joues a des soucis de mode fenetre, dis-le moi et je regarde.",
+    cta_buy: "Obtenir ScreenForge - 4,99$",
+    cta_back: "Retour a l'accueil",
+    update_note: "Les proprietaires recoivent tous les futurs jeux automatiquement via l'auto-update integre. Un seul achat, mises a jour a vie."
+  },
+  es: {
+    back: "< Volver a ScreenForge",
+    subtitle: "Juegos compatibles y lo que viene",
+    badge_live: "EN VIVO", badge_next: "PROXIMO", badge_soon: "PLANIFICADO", badge_consider: "EN EVALUACION",
+    sec1_title: "Actualmente compatibles", sec2_title: "Desarrollo activo", sec3_title: "Planificado", sec4_title: "En evaluacion",
+    note_4a: "Motor 4A - modo ventana + resolucion personalizada",
+    note_exodus: "Forzar DX11 + cfg bloqueado (solucion exclusiva)",
+    note_re: "RE Engine - DX12 fuerza borderless",
+    note_dx12: "DX12 fuerza borderless",
+    note_ue4: "Arreglo motor UE4",
+    note_misc: "Problemas ventana/pantalla completa",
+    cta_title: "Quieres sugerir un juego?",
+    cta_desc: "Priorizo juegos segun la demanda real. Si un juego que juegas tiene problemas de modo ventana, dimelo y lo revisare.",
+    cta_buy: "Consigue ScreenForge - $4.99",
+    cta_back: "Volver al inicio",
+    update_note: "Los propietarios reciben todos los juegos futuros automaticamente. Una compra, actualizaciones de por vida."
+  },
+  de: {
+    back: "< Zuruck zu ScreenForge",
+    subtitle: "Unterstutzte Spiele und was kommt",
+    badge_live: "LIVE", badge_next: "ALS NACHSTES", badge_soon: "GEPLANT", badge_consider: "IN PRUFUNG",
+    sec1_title: "Aktuell unterstutzt", sec2_title: "Aktive Entwicklung", sec3_title: "Geplant", sec4_title: "In Bewertung",
+    note_4a: "4A Engine - Fenstermodus + eigene Auflosung",
+    note_exodus: "DX11 erzwungen + cfg gesperrt (exklusiv)",
+    note_re: "RE Engine - DX12 erzwungenes Borderless",
+    note_dx12: "DX12 erzwungenes Borderless",
+    note_ue4: "UE4 Engine Fix",
+    note_misc: "Fenster/Vollbild Probleme",
+    cta_title: "Hast du einen Spielvorschlag?",
+    cta_desc: "Ich priorisiere Spiele nach realer Spielernachfrage. Wenn ein Spiel Fenstermodus-Probleme hat, lass es mich wissen.",
+    cta_buy: "ScreenForge holen - $4.99",
+    cta_back: "Zuruck zur Startseite",
+    update_note: "Besitzer erhalten alle zukunftigen Spiele automatisch. Ein Kauf, lebenslange Updates."
+  },
+  it: {
+    back: "< Torna a ScreenForge",
+    subtitle: "Giochi supportati e cosa arriva",
+    badge_live: "LIVE", badge_next: "PROSSIMO", badge_soon: "PIANIFICATO", badge_consider: "IN VALUTAZIONE",
+    sec1_title: "Attualmente supportati", sec2_title: "Sviluppo attivo", sec3_title: "Pianificato", sec4_title: "In valutazione",
+    note_4a: "Motore 4A - modalita finestra + risoluzione personalizzata",
+    note_exodus: "Forzare DX11 + cfg bloccato (soluzione esclusiva)",
+    note_re: "RE Engine - DX12 forza borderless",
+    note_dx12: "DX12 forza borderless",
+    note_ue4: "Fix motore UE4",
+    note_misc: "Problemi finestra/schermo intero",
+    cta_title: "Hai un gioco da suggerire?",
+    cta_desc: "Dai priorita ai giochi in base alla domanda reale. Se un gioco ha problemi di modalita finestra, dimmelo e lo guardero.",
+    cta_buy: "Ottieni ScreenForge - $4.99",
+    cta_back: "Torna alla home",
+    update_note: "I proprietari ricevono tutti i giochi futuri automaticamente. Un acquisto, aggiornamenti a vita."
+  },
+  pt: {
+    back: "< Voltar ao ScreenForge",
+    subtitle: "Jogos suportados e o que vem por ai",
+    badge_live: "NO AR", badge_next: "PROXIMO", badge_soon: "PLANEJADO", badge_consider: "EM AVALIACAO",
+    sec1_title: "Atualmente suportados", sec2_title: "Desenvolvimento ativo", sec3_title: "Planejado", sec4_title: "Em avaliacao",
+    note_4a: "Motor 4A - modo janela + resolucao personalizada",
+    note_exodus: "Forcar DX11 + cfg bloqueado (exclusivo)",
+    note_re: "RE Engine - DX12 forca borderless",
+    note_dx12: "DX12 forca borderless",
+    note_ue4: "Correcao motor UE4",
+    note_misc: "Problemas janela/tela cheia",
+    cta_title: "Tem um jogo para sugerir?",
+    cta_desc: "Priorizo jogos com base na demanda real. Se um jogo tem problemas de modo janela, me avise e vou olhar.",
+    cta_buy: "Obter ScreenForge - $4.99",
+    cta_back: "Voltar ao inicio",
+    update_note: "Proprietarios recebem todos os jogos futuros automaticamente. Uma compra, atualizacoes vitalicias."
+  },
+  ru: {
+    back: "< Nazad k ScreenForge",
+    subtitle: "Podderzhivaemye igry i chto dalshe",
+    badge_live: "V ETERE", badge_next: "SKORO", badge_soon: "PLANIRUETSYA", badge_consider: "RASSMATRIVAETSYA",
+    sec1_title: "V nastoyashchee vremya podderzhivayutsya", sec2_title: "Aktivnaya razrabotka", sec3_title: "Planiruetsya", sec4_title: "V otsenke",
+    note_4a: "4A Engine - okonnyj rezhim + razreshenie",
+    note_exodus: "DX11 + blokirovka cfg (eksklyuziv)",
+    note_re: "RE Engine - DX12 prinuzhdaet borderless",
+    note_dx12: "DX12 prinuzhdaet borderless",
+    note_ue4: "UE4 fix",
+    note_misc: "Problemy okno/polnyj ekran",
+    cta_title: "Est igra dlya predlozheniya?",
+    cta_desc: "Ya rasstavlyayu prioritety na osnove realnogo sprosa igrokov. Esli u igry est problemy s okonnym rezhimom, skazhite mne.",
+    cta_buy: "Poluchit ScreenForge - $4.99",
+    cta_back: "Na glavnuyu",
+    update_note: "Vladeltsy poluchayut vse budushchie igry avtomaticheski. Odna pokupka, obnovleniya navsegda."
+  },
+  pl: {
+    back: "< Powrot do ScreenForge",
+    subtitle: "Obslugiwane gry i co dalej",
+    badge_live: "NA ZYWO", badge_next: "NASTEPNE", badge_soon: "PLANOWANE", badge_consider: "W OCENIE",
+    sec1_title: "Obecnie obslugiwane", sec2_title: "Aktywny rozwoj", sec3_title: "Planowane", sec4_title: "W ocenie",
+    note_4a: "Silnik 4A - tryb okienkowy + rozdzielczosc",
+    note_exodus: "Wymuszenie DX11 + blokada cfg (ekskluzywne)",
+    note_re: "RE Engine - DX12 wymusza borderless",
+    note_dx12: "DX12 wymusza borderless",
+    note_ue4: "Poprawka silnika UE4",
+    note_misc: "Problemy okno/pelny ekran",
+    cta_title: "Masz gre do zasugerowania?",
+    cta_desc: "Priorytetyzuje gry na podstawie realnego popytu graczy. Jesli gra ma problemy z trybem okienkowym, daj mi znac.",
+    cta_buy: "Kup ScreenForge - $4.99",
+    cta_back: "Powrot do glownej",
+    update_note: "Wlasciciele otrzymuja wszystkie przyszle gry automatycznie. Jeden zakup, aktualizacje na zawsze."
+  }
+};
+
+function changeLanguage(lang) {
+  if (!T[lang]) lang = 'en';
+  const trans = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    const key = el.getAttribute('data-i18n');
+    if (trans[key]) el.textContent = trans[key];
+  });
+  document.getElementById('langSelect').value = lang;
+  try { localStorage.setItem('sf_lang', lang); } catch(e) {}
+}
+
+function detectLanguage() {
+  try {
+    const saved = localStorage.getItem('sf_lang');
+    if (saved && T[saved]) return saved;
+  } catch(e) {}
+  const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+  const map = { fr: 'fr', es: 'es', de: 'de', it: 'it', pt: 'pt', ru: 'ru', pl: 'pl', en: 'en' };
+  return map[browserLang] || 'en';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  changeLanguage(detectLanguage());
+});
+</script>
+
+</body>
+</html>
