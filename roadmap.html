@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -152,24 +152,17 @@
       <span class="game-name">Metro Exodus</span>
       <span class="game-note" data-i18n="note_exodus">DX11 swap + cfg lockdown (exclusive solution)</span>
     </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">
-      <span class="status-badge status-next" data-i18n="badge_next">COMING NEXT</span>
-      <span data-i18n="sec2_title">Active development</span>
-    </div>
-    <div class="game-item next">
-      <span class="game-name">Resident Evil 4 Remake</span>
-      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
-    </div>
-    <div class="game-item next">
+    <div class="game-item live">
       <span class="game-name">Resident Evil 2 Remake</span>
-      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - clean borderless window + cursor clip</span>
     </div>
-    <div class="game-item next">
+    <div class="game-item live">
       <span class="game-name">Resident Evil 3 Remake</span>
-      <span class="game-note" data-i18n="note_re">RE Engine - DX12 forced borderless</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - clean borderless window + cursor clip</span>
+    </div>
+    <div class="game-item live">
+      <span class="game-name">Resident Evil 4 Remake</span>
+      <span class="game-note" data-i18n="note_re">RE Engine - clean borderless window + cursor clip</span>
     </div>
   </div>
 
@@ -200,7 +193,7 @@ const T = {
     sec1_title: "Currently supported", sec2_title: "Active development",
     note_4a: "4A Engine - windowed mode + custom resolution",
     note_exodus: "DX11 swap + cfg lockdown (exclusive solution)",
-    note_re: "RE Engine - DX12 forced borderless",
+    note_re: "RE Engine - clean borderless window + cursor clip",
     suggest_title: "Know a game with windowed mode issues?",
     suggest_desc: "I prioritize new games based on real player demand. If you run into a game stuck in borderless fullscreen or that refuses to go windowed, let me know and I'll look into it.",
     suggest_how: "How to suggest a game: send me a message via the contact form on my Gumroad page, or find the Steam discussion thread where I posted about ScreenForge.",
@@ -218,7 +211,7 @@ const T = {
     sec1_title: "Actuellement supportes", sec2_title: "Developpement actif",
     note_4a: "Moteur 4A - mode fenetre + resolution custom",
     note_exodus: "Forcage DX11 + cfg verrouille (solution exclusive)",
-    note_re: "RE Engine - DX12 force borderless",
+    note_re: "RE Engine - fenetre borderless + confinement souris",
     suggest_title: "Tu connais un jeu avec des soucis de mode fenetre ?",
     suggest_desc: "Je priorise les nouveaux jeux selon la demande reelle des joueurs. Si tu tombes sur un jeu bloque en borderless ou qui refuse le mode fenetre, dis-le moi et je regarde.",
     suggest_how: "Comment suggerer un jeu : envoie-moi un message via le formulaire de contact sur ma page Gumroad, ou trouve le thread Steam ou j'ai poste sur ScreenForge.",
@@ -236,7 +229,7 @@ const T = {
     sec1_title: "Actualmente compatibles", sec2_title: "Desarrollo activo",
     note_4a: "Motor 4A - modo ventana + resolucion personalizada",
     note_exodus: "Forzar DX11 + cfg bloqueado (solucion exclusiva)",
-    note_re: "RE Engine - DX12 fuerza borderless",
+    note_re: "RE Engine - ventana borderless + confinamiento raton",
     suggest_title: "Conoces un juego con problemas de modo ventana?",
     suggest_desc: "Priorizo nuevos juegos segun la demanda real de los jugadores. Si encuentras un juego atascado en borderless o que rechaza el modo ventana, dimelo y lo revisare.",
     suggest_how: "Como sugerir un juego: envia un mensaje via el formulario de contacto en mi pagina Gumroad, o encuentra el hilo de discusion Steam donde publique sobre ScreenForge.",
@@ -254,7 +247,7 @@ const T = {
     sec1_title: "Aktuell unterstutzt", sec2_title: "Aktive Entwicklung",
     note_4a: "4A Engine - Fenstermodus + eigene Auflosung",
     note_exodus: "DX11 erzwungen + cfg gesperrt (exklusiv)",
-    note_re: "RE Engine - DX12 erzwungenes Borderless",
+    note_re: "RE Engine - Borderless-Fenster + Maus-Sperre",
     suggest_title: "Kennst du ein Spiel mit Fenstermodus-Problemen?",
     suggest_desc: "Ich priorisiere neue Spiele nach realer Spielernachfrage. Wenn du auf ein Spiel stosst, das im Borderless hangt oder Fenstermodus verweigert, lass es mich wissen.",
     suggest_how: "Spiel vorschlagen: Sende mir eine Nachricht uber das Kontaktformular meiner Gumroad-Seite, oder finde den Steam-Diskussionsthread wo ich uber ScreenForge gepostet habe.",
@@ -272,7 +265,7 @@ const T = {
     sec1_title: "Attualmente supportati", sec2_title: "Sviluppo attivo",
     note_4a: "Motore 4A - modalita finestra + risoluzione personalizzata",
     note_exodus: "Forzare DX11 + cfg bloccato (soluzione esclusiva)",
-    note_re: "RE Engine - DX12 forza borderless",
+    note_re: "RE Engine - finestra borderless + blocco mouse",
     suggest_title: "Conosci un gioco con problemi di modalita finestra?",
     suggest_desc: "Dai priorita a nuovi giochi in base alla domanda reale. Se trovi un gioco bloccato in borderless o che rifiuta la modalita finestra, dimmelo e lo guardero.",
     suggest_how: "Come suggerire un gioco: inviami un messaggio tramite il modulo di contatto sulla mia pagina Gumroad, o trova la discussione Steam dove ho postato su ScreenForge.",
@@ -290,7 +283,7 @@ const T = {
     sec1_title: "Atualmente suportados", sec2_title: "Desenvolvimento ativo",
     note_4a: "Motor 4A - modo janela + resolucao personalizada",
     note_exodus: "Forcar DX11 + cfg bloqueado (exclusivo)",
-    note_re: "RE Engine - DX12 forca borderless",
+    note_re: "RE Engine - janela borderless + confinamento mouse",
     suggest_title: "Conhece um jogo com problemas de modo janela?",
     suggest_desc: "Priorizo novos jogos com base na demanda real dos jogadores. Se voce encontrar um jogo preso em borderless ou que recusa o modo janela, me avise e vou olhar.",
     suggest_how: "Como sugerir um jogo: envie uma mensagem via o formulario de contato na minha pagina Gumroad, ou encontre o thread Steam onde postei sobre ScreenForge.",
@@ -308,7 +301,7 @@ const T = {
     sec1_title: "V nastoyashchee vremya podderzhivayutsya", sec2_title: "Aktivnaya razrabotka",
     note_4a: "4A Engine - okonnyj rezhim + razreshenie",
     note_exodus: "DX11 + blokirovka cfg (eksklyuziv)",
-    note_re: "RE Engine - DX12 prinuzhdaet borderless",
+    note_re: "RE Engine - borderless okno + zahvat myshi",
     suggest_title: "Znaete igru s problemami okonnogo rezhima?",
     suggest_desc: "Ya rasstavlyayu prioritety po realnomu sprosu igrokov. Esli natknetes na igru zastryavshuyu v borderless ili otkazyvayushchuyusya v okonnyj rezhim, skazhite mne i ya posmotryu.",
     suggest_how: "Kak predlozhit igru: otprav'te mne soobshchenie cherez formu kontaktov na moej stranitse Gumroad, ili najdite obsuzhdenie Steam gde ya postil o ScreenForge.",
@@ -326,7 +319,7 @@ const T = {
     sec1_title: "Obecnie obslugiwane", sec2_title: "Aktywny rozwoj",
     note_4a: "Silnik 4A - tryb okienkowy + rozdzielczosc",
     note_exodus: "Wymuszenie DX11 + blokada cfg (ekskluzywne)",
-    note_re: "RE Engine - DX12 wymusza borderless",
+    note_re: "RE Engine - okno borderless + blokada myszy",
     suggest_title: "Znasz gre z problemami trybu okienkowego?",
     suggest_desc: "Priorytetyzuje nowe gry na podstawie realnego popytu graczy. Jesli natkniesz sie na gre zablokowana w borderless lub odmawiajaca trybu okienkowego, daj mi znac.",
     suggest_how: "Jak zasugerowac gre: wyslij mi wiadomosc przez formularz kontaktowy na mojej stronie Gumroad, lub znajdz watek dyskusji Steam, w ktorym pisalem o ScreenForge.",
