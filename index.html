@@ -1,348 +1,295 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ScreenForge - Windowed mode fix for Metro & Resident Evil games</title>
-<meta name="description" content="Force true windowed mode on Metro 2033 Redux, Last Light Redux, Metro Exodus, and Resident Evil 2/3/4 Remake. $4.99 on Gumroad.">
+<title>ScreenForge - Windowed mode fix for Metro & Resident Evil</title>
+<meta name="description" content="Force TRUE windowed mode with custom resolution, auto-center, cursor clipping, and in-game overlay. $4.99.">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #0f141e 0%, #1a2942 100%);
-    color: #e6edf3;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    line-height: 1.6;
-  }
-  .container {
-    max-width: 650px;
-    width: 100%;
-    background: rgba(30, 42, 62, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(88, 166, 255, 0.2);
-    border-radius: 20px;
-    padding: 50px 40px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    position: relative;
-  }
-  .lang-selector {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(15, 20, 30, 0.8);
-    border: 1px solid rgba(88, 166, 255, 0.3);
-    color: #e6edf3;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .lang-selector:focus { outline: 2px solid #58a6ff; }
-  .logo {
-    width: 100px; height: 100px;
-    margin: 0 auto 20px;
-    background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
-    border-radius: 20px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 42px; font-weight: bold; color: white;
-    box-shadow: 0 10px 30px rgba(88,166,255,0.3);
-  }
-  h1 {
-    font-size: 42px; font-weight: 700; margin-bottom: 10px;
-    background: linear-gradient(135deg, #fff 0%, #58a6ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .subtitle { font-size: 18px; color: #8b9baa; margin-bottom: 30px; }
-  .features {
-    text-align: left;
-    margin: 30px 0;
-    padding: 20px 25px;
-    background: rgba(15, 20, 30, 0.5);
-    border-radius: 12px;
-  }
-  .features li {
-    list-style: none;
-    padding: 10px 0;
-    font-size: 15px;
-    color: #c9d1d9;
-    border-bottom: 1px solid rgba(88,166,255,0.08);
-  }
-  .features li:last-child { border-bottom: none; }
-  .features li::before {
-    content: "\2713 ";
-    color: #2ecc71;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  .price-tag {
-    display: inline-block;
-    background: #2ecc71;
-    color: white;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-  .price-subtitle {
-    display: block;
-    font-size: 13px;
-    color: #8b9baa;
-    margin-bottom: 25px;
-  }
-  .cta-button {
-    display: inline-block;
-    background: linear-gradient(135deg, #58a6ff 0%, #1f6aa5 100%);
-    color: white;
-    padding: 18px 45px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 18px;
-    margin: 10px 5px;
-    transition: all 0.3s;
-    box-shadow: 0 8px 20px rgba(88,166,255,0.4);
-  }
-  .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(88,166,255,0.6);
-  }
-  .roadmap-button {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.08);
-    color: #58a6ff;
-    padding: 16px 36px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    margin: 10px 5px;
-    transition: all 0.3s;
-    border: 2px solid rgba(88, 166, 255, 0.4);
-  }
-  .roadmap-button:hover {
-    background: rgba(88, 166, 255, 0.15);
-    border-color: #58a6ff;
-    transform: translateY(-2px);
-  }
-  .button-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .games {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin: 15px 0;
-  }
-  .game-tag {
-    background: rgba(88, 166, 255, 0.15);
-    border: 1px solid rgba(88, 166, 255, 0.3);
-    color: #58a6ff;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-  }
-  @media (max-width: 600px) {
-    .container { padding: 30px 20px; }
-    h1 { font-size: 32px; }
-    .lang-selector { top: 10px; right: 10px; font-size: 11px; padding: 6px 10px; }
-    .cta-button, .roadmap-button { display: block; margin: 10px 0; width: 100%; }
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+        background: #0a0a0f;
+        color: #e5e7eb;
+        line-height: 1.65;
+        overflow-x: hidden;
+    }
+
+    .lang-switch {
+        position: fixed; top: 20px; right: 20px; z-index: 100;
+        background: rgba(26, 26, 46, 0.9); backdrop-filter: blur(10px);
+        border-radius: 10px; padding: 6px; display: flex; gap: 4px;
+        border: 1px solid #2a2a3e;
+    }
+    .lang-switch button {
+        background: transparent; color: #9ca3af; border: none;
+        padding: 6px 12px; border-radius: 6px; cursor: pointer;
+        font-weight: 600; font-size: 13px; transition: all 0.2s;
+    }
+    .lang-switch button:hover { color: #fff; }
+    .lang-switch button.active { background: #3b82f6; color: #fff; }
+
+    .hero {
+        min-height: 100vh; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; padding: 40px 20px;
+        text-align: center;
+        background: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a0f 60%);
+    }
+    .badge-version {
+        display: inline-block;
+        background: linear-gradient(90deg, #22c55e, #3b82f6);
+        color: #0a0a0f; padding: 6px 16px; border-radius: 20px;
+        font-weight: 700; font-size: 13px; margin-bottom: 20px; letter-spacing: 1px;
+    }
+    .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; letter-spacing: -2px;
+        margin-bottom: 15px; line-height: 1.1;
+        background: linear-gradient(180deg, #ffffff 0%, #60a5fa 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero .tagline {
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: #9ca3af;
+        margin-bottom: 40px; max-width: 700px;
+    }
+    .cta {
+        display: inline-flex; align-items: center; gap: 10px;
+        background: linear-gradient(90deg, #22c55e, #16a34a); color: #fff;
+        padding: 16px 40px; border-radius: 50px; font-size: 1.15rem; font-weight: 700;
+        text-decoration: none; transition: all 0.3s;
+        box-shadow: 0 10px 40px rgba(34, 197, 94, 0.35);
+    }
+    .cta:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(34, 197, 94, 0.5); }
+    .cta-price {
+        background: rgba(255, 255, 255, 0.2); padding: 4px 12px;
+        border-radius: 20px; font-size: 0.95em;
+    }
+    .hero-badges {
+        margin-top: 30px; display: flex; gap: 20px; flex-wrap: wrap;
+        justify-content: center; color: #6b7280; font-size: 0.9rem;
+    }
+    .hero-badges span { display: inline-flex; align-items: center; gap: 6px; }
+
+    section {
+        max-width: 1100px; margin: 0 auto; padding: 80px 20px;
+    }
+    section h2 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem); text-align: center;
+        margin-bottom: 40px; color: #fff;
+    }
+    section h2 span {
+        background: linear-gradient(90deg, #3b82f6, #22c55e);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .games-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .game-card {
+        background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(10px);
+        padding: 25px; border-radius: 16px; border: 1px solid #2a2a3e;
+        transition: all 0.3s;
+    }
+    .game-card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+    .game-card h3 { color: #60a5fa; font-size: 1.15rem; margin-bottom: 8px; }
+    .game-card p { color: #9ca3af; font-size: 0.9rem; }
+
+    .features-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .feature {
+        background: rgba(26, 26, 46, 0.4); padding: 30px;
+        border-radius: 16px; border: 1px solid #2a2a3e;
+    }
+    .feature-icon {
+        width: 50px; height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #22c55e);
+        border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        font-size: 24px; margin-bottom: 20px;
+    }
+    .feature h3 { color: #fff; margin-bottom: 10px; font-size: 1.15rem; }
+    .feature p { color: #9ca3af; font-size: 0.95rem; }
+
+    .cta-section {
+        text-align: center; padding: 80px 20px;
+        background: radial-gradient(ellipse at center, #1e1b4b 0%, transparent 70%);
+    }
+    .cta-section h2 { margin-bottom: 10px; }
+    .cta-section .subtitle { color: #9ca3af; margin-bottom: 30px; }
+
+    .footer-links {
+        display: flex; gap: 30px; justify-content: center;
+        margin-top: 40px; flex-wrap: wrap;
+    }
+    .footer-links a {
+        color: #60a5fa; text-decoration: none; font-weight: 500;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+
+    footer {
+        text-align: center; padding: 40px 20px;
+        color: #6b7280; border-top: 1px solid #2a2a3e; font-size: 0.9rem;
+    }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
-    <option value="en">EN English</option>
-    <option value="fr">FR Francais</option>
-    <option value="es">ES Espanol</option>
-    <option value="de">DE Deutsch</option>
-    <option value="it">IT Italiano</option>
-    <option value="pt">PT Portugues</option>
-    <option value="ru">RU Russkij</option>
-    <option value="pl">PL Polski</option>
-  </select>
-
-  <div class="logo">SF</div>
-  <h1>ScreenForge</h1>
-  <div class="subtitle" id="subtitle">Force true windowed mode on Metro and Resident Evil games</div>
-
-  <div class="games">
-    <span class="game-tag">Metro 2033 Redux</span>
-    <span class="game-tag">Last Light Redux</span>
-    <span class="game-tag">Metro Exodus</span>
-    <span class="game-tag">Resident Evil 2 Remake</span>
-    <span class="game-tag">Resident Evil 3 Remake</span>
-    <span class="game-tag">Resident Evil 4 Remake</span>
-  </div>
-
-  <ul class="features">
-    <li id="feat1">Forces true windowed mode (not just borderless)</li>
-    <li id="feat2">Exclusive fix for Metro Exodus (DX11 swap) and RE Engine games (RE2/3/4 - no flicker)</li>
-    <li id="feat3">Custom resolution, auto-center, optional borderless</li>
-    <li id="feat4">Auto-detects Steam install (multi-library support)</li>
-    <li id="feat5">Free lifetime updates - new games added regularly</li>
-    <li id="feat6">One-click reset if you want to revert</li>
-  </ul>
-
-  <div class="price-tag">$4.99</div>
-  <span class="price-subtitle" id="priceSubtitle">One-time purchase - lifetime updates included</span>
-
-  <div class="button-row">
-    <a href="https://alphakiir.gumroad.com/l/screenforge" class="cta-button" id="ctaBtn">
-      Get ScreenForge on Gumroad
-    </a>
-    <a href="roadmap.html" class="roadmap-button" id="roadmapBtn">
-      See the roadmap
-    </a>
-  </div>
+<div class="lang-switch">
+    <button data-lang="en" class="active">EN</button>
+    <button data-lang="fr">FR</button>
 </div>
 
+<section class="hero">
+    <div class="badge-version">v2.1 — With auto-updater</div>
+    <h1 data-t="hero_title">ScreenForge</h1>
+    <p class="tagline" data-t="hero_tagline">True windowed mode for Metro &amp; Resident Evil. Custom resolution, cursor clipping, in-game overlay — all in one click.</p>
+    <a href="https://alphakiir.gumroad.com/l/screenforge" class="cta" target="_blank" rel="noopener">
+        <span data-t="cta_buy">Get ScreenForge</span>
+        <span class="cta-price">$4.99</span>
+    </a>
+    <div class="hero-badges">
+        <span>✓ <span data-t="badge_lifetime">Lifetime updates</span></span>
+        <span>✓ <span data-t="badge_money">30-day money-back</span></span>
+        <span>✓ Windows 10 / 11</span>
+    </div>
+</section>
+
+<section>
+    <h2 data-t="games_title">6 <span data-t="games_title_span">supported games</span></h2>
+    <div class="games-grid">
+        <div class="game-card"><h3>Metro 2033 Redux</h3><p data-t="game_metro">4A Engine — custom resolution, borderless, cursor clipping</p></div>
+        <div class="game-card"><h3>Metro Last Light Redux</h3><p data-t="game_metro">4A Engine — custom resolution, borderless, cursor clipping</p></div>
+        <div class="game-card"><h3>Metro Exodus</h3><p data-t="game_exodus">Exclusive DX11 swap + cfg lockdown solution</p></div>
+        <div class="game-card"><h3>Resident Evil 2 Remake</h3><p data-t="game_re">RE Engine — borderless + cursor clipping</p></div>
+        <div class="game-card"><h3>Resident Evil 3 Remake</h3><p data-t="game_re">RE Engine — borderless + cursor clipping</p></div>
+        <div class="game-card"><h3>Resident Evil 4 Remake</h3><p data-t="game_re">RE Engine — borderless + cursor clipping</p></div>
+    </div>
+</section>
+
+<section>
+    <h2 data-t="features_title"><span data-t="features_title_span">Key features</span></h2>
+    <div class="features-grid">
+        <div class="feature">
+            <div class="feature-icon">🪟</div>
+            <h3 data-t="feat1_title">TRUE windowed mode</h3>
+            <p data-t="feat1_desc">Not just borderless — a real windowed mode at any resolution, including on 4K and ultrawide screens.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3 data-t="feat2_title">Cursor clipping</h3>
+            <p data-t="feat2_desc">Mouse stays inside the game window — no more accidental clicks on your second monitor.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3 data-t="feat3_title">In-game overlay</h3>
+            <p data-t="feat3_desc">FPS, GPU temp, GPU usage and session time via Shift+F1. Draggable and saved between sessions.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3 data-t="feat4_title">Live changes</h3>
+            <p data-t="feat4_desc">Modify resolution, borderless, centering while the game is running. No restart required.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🔄</div>
+            <h3 data-t="feat5_title">Built-in auto-updater</h3>
+            <p data-t="feat5_desc">New versions install in one click from the app. New games added automatically without reinstalling.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🌍</div>
+            <h3 data-t="feat6_title">8 languages</h3>
+            <p data-t="feat6_desc">English, Français, Español, Deutsch, Italiano, Português, Русский, Polski.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2 data-t="cta_title">Stop fighting with Windows.</h2>
+    <p class="subtitle" data-t="cta_sub">One click. Your games run the way you want them to.</p>
+    <a href="https://alphakiir.gumroad.com/l/screenforge" class="cta" target="_blank" rel="noopener">
+        <span data-t="cta_buy_2">Get ScreenForge now</span>
+        <span class="cta-price">$4.99</span>
+    </a>
+    <div class="footer-links">
+        <a href="roadmap.html" data-t="link_roadmap">Roadmap &amp; upcoming games</a>
+        <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" data-t="link_buy">Buy on Gumroad</a>
+    </div>
+</section>
+
+<footer>
+    <p>ScreenForge v2.1 &copy; 2026 AlphaKiir. <span data-t="footer_note">Not affiliated with 4A Games, Deep Silver, or Capcom.</span></p>
+</footer>
+
 <script>
+// Translations (light, only UI-visible strings)
 const translations = {
-  en: {
-    subtitle: "Force true windowed mode on Metro and Resident Evil games",
-    feat1: "Forces true windowed mode (not just borderless)",
-    feat2: "Exclusive fix for Metro Exodus (DX11 swap) and RE Engine games (RE2/3/4 - no flicker)",
-    feat3: "Custom resolution, auto-center, optional borderless",
-    feat4: "Auto-detects Steam install (multi-library support)",
-    feat5: "Free lifetime updates - new games added regularly",
-    feat6: "One-click reset if you want to revert",
-    priceSubtitle: "One-time purchase - lifetime updates included",
-    cta: "Get ScreenForge on Gumroad",
-    roadmap: "See the roadmap"
-  },
-  fr: {
-    subtitle: "Forcer le vrai mode fenetre sur Metro et Resident Evil",
-    feat1: "Force le vrai mode fenetre (pas juste sans bordures)",
-    feat2: "Fix exclusif pour Metro Exodus (DX11) et jeux RE Engine (RE2/3/4 - pas de flicker)",
-    feat3: "Resolution custom, centrage auto, sans bordures optionnel",
-    feat4: "Detection automatique Steam (multi-bibliotheques)",
-    feat5: "Mises a jour gratuites a vie - nouveaux jeux ajoutes",
-    feat6: "Reinitialisation en un clic si tu veux revenir en arriere",
-    priceSubtitle: "Achat unique - mises a jour a vie incluses",
-    cta: "Obtenir ScreenForge sur Gumroad",
-    roadmap: "Voir la feuille de route"
-  },
-  es: {
-    subtitle: "Forzar modo ventana real en Metro y Resident Evil",
-    feat1: "Fuerza el modo ventana real (no solo sin bordes)",
-    feat2: "Solucion exclusiva para Metro Exodus (DX11) y juegos RE Engine (RE2/3/4 - sin flicker)",
-    feat3: "Resolucion personalizada, auto-centrado, sin bordes opcional",
-    feat4: "Detecta Steam automaticamente (multi-bibliotecas)",
-    feat5: "Actualizaciones gratuitas de por vida - nuevos juegos",
-    feat6: "Restablecimiento de un clic si quieres revertir",
-    priceSubtitle: "Compra unica - actualizaciones de por vida incluidas",
-    cta: "Consigue ScreenForge en Gumroad",
-    roadmap: "Ver la hoja de ruta"
-  },
-  de: {
-    subtitle: "Echten Fenstermodus auf Metro- und Resident Evil-Spielen erzwingen",
-    feat1: "Erzwingt echten Fenstermodus (nicht nur randlos)",
-    feat2: "Exklusiver Fix fur Metro Exodus (DX11) und RE Engine Spiele (RE2/3/4 - kein Flicker)",
-    feat3: "Eigene Auflosung, Auto-Zentrierung, optional randlos",
-    feat4: "Automatische Steam-Erkennung (Multi-Bibliothek)",
-    feat5: "Kostenlose Updates auf Lebenszeit - neue Spiele",
-    feat6: "Ein-Klick-Zurucksetzen wenn du zuruck willst",
-    priceSubtitle: "Einmaliger Kauf - lebenslange Updates inklusive",
-    cta: "ScreenForge auf Gumroad holen",
-    roadmap: "Roadmap ansehen"
-  },
-  it: {
-    subtitle: "Forza la modalita finestra vera su Metro e Resident Evil",
-    feat1: "Forza la modalita finestra vera (non solo senza bordi)",
-    feat2: "Fix esclusivo per Metro Exodus (DX11) e giochi RE Engine (RE2/3/4 - niente flicker)",
-    feat3: "Risoluzione personalizzata, auto-centro, senza bordi opzionale",
-    feat4: "Rilevamento automatico di Steam (multi-libreria)",
-    feat5: "Aggiornamenti gratuiti a vita - nuovi giochi aggiunti",
-    feat6: "Reset con un clic se vuoi tornare indietro",
-    priceSubtitle: "Acquisto unico - aggiornamenti a vita inclusi",
-    cta: "Ottieni ScreenForge su Gumroad",
-    roadmap: "Vedi la roadmap"
-  },
-  pt: {
-    subtitle: "Forca o verdadeiro modo janela nos jogos Metro e Resident Evil",
-    feat1: "Forca o verdadeiro modo janela (nao apenas sem bordas)",
-    feat2: "Fix exclusivo para Metro Exodus (DX11) e jogos RE Engine (RE2/3/4 - sem flicker)",
-    feat3: "Resolucao personalizada, auto-centro, sem bordas opcional",
-    feat4: "Deteccao automatica do Steam (multi-bibliotecas)",
-    feat5: "Atualizacoes gratuitas para sempre - novos jogos",
-    feat6: "Reset com um clique se quiser reverter",
-    priceSubtitle: "Compra unica - atualizacoes vitalicias incluidas",
-    cta: "Obter ScreenForge no Gumroad",
-    roadmap: "Ver o roadmap"
-  },
-  ru: {
-    subtitle: "Nastoyashchiy okonnyy rezhim v igrah Metro i Resident Evil",
-    feat1: "Nastoyashchiy okonnyy rezhim (ne tolko bez ramok)",
-    feat2: "Eksklyuzivnoe reshenie dlya Metro Exodus (DX11) i igr RE Engine (RE2/3/4 - bez flicker)",
-    feat3: "Svoe razreshenie, avto-centr, opcionalno bez ramok",
-    feat4: "Avtoobnaruzhenie Steam (multi-biblioteki)",
-    feat5: "Besplatnye obnovleniya - novye igry regulyarno",
-    feat6: "Sbros v odin klik esli zahotite otmenit",
-    priceSubtitle: "Odnorazovaya pokupka - obnovleniya navsegda",
-    cta: "Kupit ScreenForge na Gumroad",
-    roadmap: "Smotret roadmap"
-  },
-  pl: {
-    subtitle: "Wymus prawdziwy tryb okienkowy w grach Metro i Resident Evil",
-    feat1: "Wymusza prawdziwy tryb okienkowy (nie tylko bez ramek)",
-    feat2: "Wylaczna poprawka dla Metro Exodus (DX11) i gier RE Engine (RE2/3/4 - bez flicker)",
-    feat3: "Wlasna rozdzielczosc, auto-centrowanie, bez ramek",
-    feat4: "Auto-wykrywanie Steam (wiele bibliotek)",
-    feat5: "Darmowe aktualizacje na zawsze - nowe gry",
-    feat6: "Reset jednym klikiem jesli chcesz cofnac",
-    priceSubtitle: "Jednorazowy zakup - aktualizacje na zawsze",
-    cta: "Kup ScreenForge na Gumroad",
-    roadmap: "Zobacz roadmap"
-  }
+    fr: {
+        hero_tagline: "Mode fenêtré vrai pour Metro & Resident Evil. Résolution custom, souris verrouillée, overlay en jeu — en un clic.",
+        cta_buy: "Acheter ScreenForge",
+        badge_lifetime: "Mises à jour à vie",
+        badge_money: "Remboursement 30 jours",
+        games_title: "6",
+        games_title_span: "jeux supportés",
+        game_metro: "4A Engine — résolution custom, sans bordures, souris verrouillée",
+        game_exodus: "Solution exclusive DX11 swap + lockdown du cfg",
+        game_re: "RE Engine — sans bordures + souris verrouillée",
+        features_title_span: "Fonctionnalités clés",
+        feat1_title: "Mode fenêtré VRAI",
+        feat1_desc: "Pas juste sans bordures — un vrai mode fenêtré à toute résolution, même en 4K et ultrawide.",
+        feat2_title: "Souris verrouillée",
+        feat2_desc: "La souris reste dans la fenêtre du jeu — plus de clics accidentels sur le second écran.",
+        feat3_title: "Overlay en jeu",
+        feat3_desc: "FPS, température GPU, usage GPU et temps de session via Shift+F1. Déplaçable et persistant.",
+        feat4_title: "Modifications en direct",
+        feat4_desc: "Changer résolution, bordures, centrage pendant que le jeu tourne. Aucun redémarrage nécessaire.",
+        feat5_title: "Auto-updater intégré",
+        feat5_desc: "Nouvelles versions installées en un clic depuis l'app. Nouveaux jeux ajoutés sans réinstaller.",
+        feat6_title: "8 langues",
+        feat6_desc: "English, Français, Español, Deutsch, Italiano, Português, Русский, Polski.",
+        cta_title: "Arrête de te battre avec Windows.",
+        cta_sub: "Un clic. Tes jeux tournent comme tu le veux.",
+        cta_buy_2: "Obtenir ScreenForge",
+        link_roadmap: "Roadmap & jeux à venir",
+        link_buy: "Acheter sur Gumroad",
+        footer_note: "Non affilié à 4A Games, Deep Silver ou Capcom."
+    },
+    en: {} // en is the default, keeps the original HTML text
 };
 
-function changeLanguage(lang) {
-  if (!translations[lang]) lang = 'en';
-  const t = translations[lang];
-  document.documentElement.lang = lang;
-  document.getElementById('subtitle').textContent = t.subtitle;
-  document.getElementById('feat1').textContent = t.feat1;
-  document.getElementById('feat2').textContent = t.feat2;
-  document.getElementById('feat3').textContent = t.feat3;
-  document.getElementById('feat4').textContent = t.feat4;
-  document.getElementById('feat5').textContent = t.feat5;
-  document.getElementById('feat6').textContent = t.feat6;
-  document.getElementById('priceSubtitle').textContent = t.priceSubtitle;
-  document.getElementById('ctaBtn').textContent = t.cta;
-  document.getElementById('roadmapBtn').textContent = t.roadmap;
-  document.getElementById('langSelect').value = lang;
-  try { localStorage.setItem('sf_lang', lang); } catch(e) {}
+function setLang(lang) {
+    document.querySelectorAll('[data-t]').forEach(el => {
+        const key = el.getAttribute('data-t');
+        if (lang === 'en') {
+            // Re-apply original text (stored in data-orig on first run)
+            if (el.dataset.orig) el.textContent = el.dataset.orig;
+        } else if (translations[lang] && translations[lang][key]) {
+            if (!el.dataset.orig) el.dataset.orig = el.textContent;
+            el.textContent = translations[lang][key];
+        }
+    });
+    document.querySelectorAll('.lang-switch button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('sf_lang', lang); } catch(e){}
 }
 
-function detectLanguage() {
-  try {
-    const saved = localStorage.getItem('sf_lang');
-    if (saved && translations[saved]) return saved;
-  } catch(e) {}
-  const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
-  const map = { fr: 'fr', es: 'es', de: 'de', it: 'it', pt: 'pt', ru: 'ru', pl: 'pl', en: 'en' };
-  return map[browserLang] || 'en';
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  changeLanguage(detectLanguage());
+// Init
+document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => setLang(btn.dataset.lang));
 });
+
+// Auto-detect
+(function() {
+    let lang = 'en';
+    try {
+        const saved = localStorage.getItem('sf_lang');
+        if (saved && (saved === 'fr' || saved === 'en')) lang = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('fr')) lang = 'fr';
+    } catch(e){}
+    setLang(lang);
+})();
 </script>
 
 </body>
