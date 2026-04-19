@@ -4,57 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScreenForge — Windowed mode fix for Metro & Resident Evil</title>
-<meta name="description" content="Force TRUE windowed mode with custom resolution, auto-center, cursor clipping, and in-game overlay. $4.99 · Lifetime updates.">
-<meta property="og:title" content="ScreenForge — Windowed mode fix for Metro & Resident Evil">
-<meta property="og:description" content="True windowed mode, custom resolution, cursor clipping, in-game overlay. $4.99.">
+<meta name="description" content="Force TRUE windowed mode with custom resolution, lockable cursor clipping, and in-game overlay. $4.99 · Lifetime updates.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg: #05050a;
-    --bg-2: #0d0d14;
-    --surface: #13131f;
-    --surface-hover: #1a1a2a;
-    --border: rgba(255,255,255,0.06);
-    --border-strong: rgba(255,255,255,0.12);
-    --text: #ededf0;
-    --text-dim: #a0a0b0;
-    --text-faint: #606070;
-    --accent: #7c3aed;
-    --accent-2: #22d3ee;
-    --accent-3: #10b981;
+    --bg: #05050a; --bg-2: #0d0d14;
+    --surface: #13131f; --surface-hover: #1a1a2a;
+    --border: rgba(255,255,255,0.06); --border-strong: rgba(255,255,255,0.12);
+    --text: #ededf0; --text-dim: #a0a0b0; --text-faint: #606070;
+    --accent: #7c3aed; --accent-2: #22d3ee; --accent-3: #10b981;
     --gradient: linear-gradient(135deg, #7c3aed 0%, #22d3ee 50%, #10b981 100%);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.55;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    background: var(--bg); color: var(--text);
+    line-height: 1.55; overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
-
-/* BACKGROUND EFFECTS */
 .bg-grid {
     position: fixed; inset: 0; z-index: -2;
     background-image:
-        linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center top, black 0%, transparent 70%);
 }
 .bg-glow {
     position: fixed; z-index: -1; pointer-events: none;
-    width: 600px; height: 600px; border-radius: 50%;
-    filter: blur(100px); opacity: 0.35;
+    width: 500px; height: 500px; border-radius: 50%;
+    filter: blur(100px); opacity: 0.3;
 }
-.bg-glow.one { top: -100px; left: -100px; background: #7c3aed; }
-.bg-glow.two { bottom: -100px; right: -100px; background: #22d3ee; }
+.bg-glow.one { top: -150px; left: -100px; background: #7c3aed; }
+.bg-glow.two { top: 20%; right: -150px; background: #22d3ee; }
 
-/* LANG SWITCH */
 .lang-switch {
     position: fixed; top: 20px; right: 20px; z-index: 100;
     background: rgba(19, 19, 31, 0.8); backdrop-filter: blur(20px);
@@ -65,61 +50,52 @@ body {
     background: transparent; color: var(--text-dim); border: none;
     padding: 6px 14px; border-radius: 100px; cursor: pointer;
     font-weight: 600; font-size: 12px; font-family: inherit;
-    transition: all 0.2s;
 }
-.lang-switch button:hover { color: var(--text); }
 .lang-switch button.active { background: var(--text); color: var(--bg); }
 
-/* NAV */
 nav {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
     background: rgba(19, 19, 31, 0.8); backdrop-filter: blur(20px);
-    border-radius: 100px; padding: 8px 8px 8px 24px; z-index: 99;
-    display: flex; align-items: center; gap: 24px;
+    border-radius: 100px; padding: 8px 8px 8px 22px; z-index: 99;
+    display: flex; align-items: center; gap: 22px;
     border: 1px solid var(--border);
 }
 nav .logo {
-    font-weight: 800; letter-spacing: -0.5px; font-size: 16px;
+    font-weight: 800; letter-spacing: -0.5px; font-size: 15px;
     background: var(--gradient); -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-nav a {
-    color: var(--text-dim); text-decoration: none; font-size: 14px;
-    font-weight: 500; transition: color 0.2s;
-}
+nav a { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 500; }
 nav a:hover { color: var(--text); }
 nav .nav-cta {
-    background: var(--text); color: var(--bg); padding: 8px 18px;
+    background: var(--text); color: var(--bg); padding: 7px 16px;
     border-radius: 100px; font-weight: 600;
 }
-nav .nav-cta:hover { background: var(--accent-2); color: var(--bg); }
+nav .nav-cta:hover { background: var(--accent-2); }
 @media (max-width: 600px) {
-    nav { padding: 6px 6px 6px 16px; gap: 12px; font-size: 13px; }
+    nav { padding: 6px 6px 6px 14px; gap: 10px; font-size: 12px; }
     nav .nav-desktop-only { display: none; }
 }
 
-/* HERO */
 .hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; padding: 140px 20px 80px;
-    text-align: center; position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 130px 20px 60px; text-align: center;
 }
-.hero .pill {
+.pill {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3);
-    padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500;
-    color: var(--accent-2); margin-bottom: 24px;
-    animation: fadeUp 0.6s ease-out;
+    padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500;
+    color: var(--accent-2); margin-bottom: 22px;
 }
-.hero .pill::before {
+.pill::before {
     content: ''; width: 6px; height: 6px; background: var(--accent-3);
     border-radius: 50%; box-shadow: 0 0 8px var(--accent-3);
     animation: pulse 2s ease-in-out infinite;
 }
 .hero h1 {
-    font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 900;
-    letter-spacing: -3px; line-height: 1; margin-bottom: 24px;
-    animation: fadeUp 0.8s ease-out;
+    font-size: clamp(2.6rem, 6.5vw, 4.8rem); font-weight: 900;
+    letter-spacing: -2.5px; line-height: 1; margin-bottom: 22px;
 }
 .hero h1 .grad {
     background: var(--gradient); -webkit-background-clip: text;
@@ -127,18 +103,13 @@ nav .nav-cta:hover { background: var(--accent-2); color: var(--bg); }
     background-size: 200% 200%; animation: shimmer 6s ease-in-out infinite;
 }
 .hero .tagline {
-    font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--text-dim);
-    max-width: 640px; margin-bottom: 40px; font-weight: 400;
-    animation: fadeUp 1s ease-out;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem); color: var(--text-dim);
+    max-width: 620px; margin-bottom: 34px;
 }
-.hero .cta-group {
-    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-    animation: fadeUp 1.2s ease-out;
-}
-
+.cta-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 .btn {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px; border-radius: 100px; font-weight: 600;
+    padding: 14px 26px; border-radius: 100px; font-weight: 600;
     font-size: 15px; text-decoration: none; transition: all 0.2s;
     font-family: inherit; border: none; cursor: pointer;
 }
@@ -151,80 +122,114 @@ nav .nav-cta:hover { background: var(--accent-2); color: var(--bg); }
     background: var(--surface); color: var(--text);
     border: 1px solid var(--border-strong);
 }
-.btn-secondary:hover { background: var(--surface-hover); border-color: var(--text-dim); }
+.btn-secondary:hover { background: var(--surface-hover); }
 .btn .price {
     background: rgba(0,0,0,0.15); padding: 2px 10px;
     border-radius: 100px; font-size: 13px; font-weight: 700;
-    margin-left: 4px;
 }
+.trust {
+    display: flex; gap: 22px; flex-wrap: wrap; justify-content: center;
+    margin-top: 28px; color: var(--text-faint); font-size: 13px;
+}
+.trust span { display: inline-flex; align-items: center; gap: 6px; }
+.trust svg { width: 14px; height: 14px; color: var(--accent-3); }
 
-.hero .trust {
-    display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
-    margin-top: 32px; color: var(--text-faint); font-size: 13px;
-    animation: fadeUp 1.4s ease-out;
+section { padding: 70px 20px; max-width: 1100px; margin: 0 auto; }
+section h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem); text-align: center;
+    font-weight: 800; letter-spacing: -1.5px; margin-bottom: 14px; line-height: 1.15;
 }
-.hero .trust span { display: inline-flex; align-items: center; gap: 6px; }
-.hero .trust svg { width: 14px; height: 14px; color: var(--accent-3); }
-
-/* APP MOCKUP */
-.mockup-wrap {
-    margin-top: 80px; position: relative;
-    animation: fadeUp 1.6s ease-out;
-}
-.mockup {
-    max-width: 800px; margin: 0 auto;
-    background: var(--surface); border-radius: 14px;
-    border: 1px solid var(--border-strong);
-    box-shadow: 0 50px 100px rgba(0,0,0,0.5), 0 0 80px rgba(124, 58, 237, 0.15);
-    overflow: hidden;
-}
-.mockup-top {
-    background: #0f0f18; padding: 12px 16px;
-    display: flex; align-items: center; gap: 8px;
-    border-bottom: 1px solid var(--border);
-}
-.mockup-top .dot { width: 11px; height: 11px; border-radius: 50%; }
-.mockup-top .r { background: #ff5f57; }
-.mockup-top .y { background: #febc2e; }
-.mockup-top .g { background: #28c840; }
-.mockup-top .title {
-    margin-left: auto; margin-right: auto; color: var(--text-dim);
-    font-size: 12px; font-weight: 500;
-}
-.mockup-body { padding: 30px 40px; background: #0e0e17; }
-.mockup-body h3 {
-    font-size: 28px; font-weight: 800; margin-bottom: 4px;
+section h2 .grad {
     background: var(--gradient); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; letter-spacing: -1px;
+    -webkit-text-fill-color: transparent;
 }
-.mockup-body .sub { color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
-.mockup-grid { display: grid; grid-template-columns: 180px 1fr; gap: 24px; }
-.mockup-list { background: #0a0a12; border-radius: 10px; padding: 12px; font-size: 13px; }
-.mockup-list .item {
-    padding: 10px 14px; border-radius: 6px; margin: 2px 0; cursor: pointer;
-    color: var(--text-dim); transition: all 0.2s;
-}
-.mockup-list .item.active { background: var(--accent); color: white; font-weight: 500; }
-.mockup-panel {
-    background: #0a0a12; border-radius: 10px; padding: 20px;
-    display: flex; flex-direction: column; gap: 16px;
-}
-.mockup-row { display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
-.mockup-row .label { color: var(--text-dim); }
-.mockup-row .value { color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-.mockup-btn {
-    background: var(--gradient); color: white; padding: 10px 16px;
-    border-radius: 8px; text-align: center; font-size: 13px; font-weight: 700;
-    margin-top: 6px; letter-spacing: 0.5px;
+section .sub {
+    text-align: center; color: var(--text-dim);
+    max-width: 560px; margin: 0 auto 44px; font-size: 1rem;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 16px;
 }
+.feature-card {
+    background: var(--surface); padding: 28px 24px; border-radius: 14px;
+    border: 1px solid var(--border); transition: all 0.25s ease;
+}
+.feature-card:hover {
+    border-color: var(--border-strong); transform: translateY(-3px);
+    background: var(--surface-hover);
+}
+.feat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(34,211,238,0.2));
+    border: 1px solid rgba(124,58,237,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent-2); margin-bottom: 16px;
+}
+.feat-icon svg { width: 20px; height: 20px; }
+.feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.feature-card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+
+.games-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+}
+.game-item {
+    background: var(--surface); padding: 22px; border-radius: 12px;
+    border: 1px solid var(--border); transition: all 0.25s;
+}
+.game-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.game-item.featured {
+    background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(34,211,238,0.05));
+    border-color: rgba(124,58,237,0.3);
+}
+.game-tag {
+    display: inline-block; background: rgba(255,255,255,0.05);
+    color: var(--text-dim); padding: 3px 9px; border-radius: 100px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.6px;
+    text-transform: uppercase; margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+}
+.game-tag.exclusive {
+    background: linear-gradient(90deg, rgba(124,58,237,0.25), rgba(34,211,238,0.25));
+    color: var(--accent-2); border: 1px solid rgba(34,211,238,0.3);
+}
+.game-item h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 4px; }
+.game-item p { color: var(--text-dim); font-size: 0.87rem; }
+
+.cta-box {
+    max-width: 720px; margin: 0 auto; text-align: center;
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(34,211,238,0.08));
+    border: 1px solid rgba(124,58,237,0.2); border-radius: 22px;
+    padding: 50px 32px;
+}
+.cta-box h2 { margin-bottom: 12px; }
+.cta-box p { color: var(--text-dim); font-size: 1.05rem; margin-bottom: 28px; }
+.cta-box .info {
+    margin-top: 20px; color: var(--text-faint); font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+footer {
+    padding: 50px 20px 36px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--text-faint);
+}
+footer .logo {
+    font-weight: 800; font-size: 16px; letter-spacing: -0.5px;
+    background: var(--gradient); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+footer .links {
+    display: flex; gap: 24px; justify-content: center;
+    flex-wrap: wrap; margin: 20px 0 24px;
+}
+footer .links a { color: var(--text-dim); text-decoration: none; font-size: 14px; }
+footer .links a:hover { color: var(--text); }
+footer .note { font-size: 12px; }
+
 @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; } 50% { opacity: 0.5; }
 }
 @keyframes shimmer {
     0%, 100% { background-position: 0% 50%; }
@@ -252,272 +257,155 @@ nav .nav-cta:hover { background: var(--accent-2); color: var(--bg); }
 </nav>
 
 <section class="hero">
-    <div class="pill" data-t="pill_new">v2.1 — Now with built-in auto-updater</div>
+    <div class="pill" data-t="pill_new">v2.1 — Built-in auto-updater</div>
     <h1>
         <span data-t="h1_line1">Stop fighting</span><br>
         <span class="grad" data-t="h1_line2">with windowed mode.</span>
     </h1>
-    <p class="tagline" data-t="tagline">
-        ScreenForge forces TRUE windowed mode in Metro &amp; Resident Evil games.
-        Custom resolution, cursor clipping, in-game overlay — all in one click.
-    </p>
+    <p class="tagline" data-t="tagline">True windowed mode in Metro & Resident Evil. Custom resolution, lockable mouse cursor, in-game overlay — one click.</p>
     <div class="cta-group">
         <a href="https://alphakiir.gumroad.com/l/screenforge" class="btn btn-primary" target="_blank" rel="noopener">
             <span data-t="cta_buy">Get ScreenForge</span>
             <span class="price">$4.99</span>
         </a>
-        <a href="#features" class="btn btn-secondary" data-t="cta_learn">How it works →</a>
+        <a href="#features" class="btn btn-secondary" data-t="cta_learn">Features →</a>
     </div>
     <div class="trust">
         <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> <span data-t="trust_lifetime">Lifetime updates</span></span>
         <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> <span data-t="trust_money">30-day money back</span></span>
         <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg> Windows 10 / 11</span>
     </div>
-
-    <div class="mockup-wrap">
-        <div class="mockup">
-            <div class="mockup-top">
-                <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-                <span class="title">ScreenForge v2.1</span>
-            </div>
-            <div class="mockup-body">
-                <h3>ScreenForge</h3>
-                <p class="sub" data-t="mock_sub">Windowed mode fix for your PC games · Screen: 5120 × 1440</p>
-                <div class="mockup-grid">
-                    <div class="mockup-list">
-                        <div class="item" data-t="mock_g1">Metro 2033 Redux</div>
-                        <div class="item active" data-t="mock_g2">Metro Exodus</div>
-                        <div class="item" data-t="mock_g3">Resident Evil 2</div>
-                        <div class="item" data-t="mock_g4">Resident Evil 4</div>
-                    </div>
-                    <div class="mockup-panel">
-                        <div class="mockup-row"><span class="label" data-t="mock_res">Resolution</span><span class="value">2560 × 1440</span></div>
-                        <div class="mockup-row"><span class="label" data-t="mock_border">Borderless mode</span><span class="value">✓ ON</span></div>
-                        <div class="mockup-row"><span class="label" data-t="mock_center">Auto-center</span><span class="value">✓ ON</span></div>
-                        <div class="mockup-row"><span class="label" data-t="mock_cursor">Cursor clipping</span><span class="value">✓ ON</span></div>
-                        <div class="mockup-btn" data-t="mock_launch">▶ LAUNCH GAME</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
-<!-- FEATURES SECTION -->
-<section id="features" style="padding: 120px 20px;">
-    <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 20px;">
-        <span data-t="feat_title1">Everything you need.</span><br>
-        <span class="grad-text" data-t="feat_title2">Nothing you don't.</span>
-    </h2>
-    <p style="text-align: center; color: var(--text-dim); max-width: 600px; margin: 0 auto 60px; font-size: 1.1rem;" data-t="feat_sub">
-        Six focused features. Built to solve annoying PC gaming problems, not to add more.
-    </p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto;">
+<section id="features">
+    <h2><span data-t="feat_t1">Everything you need.</span> <span class="grad" data-t="feat_t2">Nothing you don't.</span></h2>
+    <p class="sub" data-t="feat_sub">Six focused features to fix annoying PC gaming problems.</p>
+    <div class="features-grid">
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
-            <h3 data-t="f1_title">TRUE windowed mode</h3>
-            <p data-t="f1_desc">Not fake borderless. A real windowed mode at any resolution — even 4K and ultrawide.</p>
+            <h3 data-t="f1_t">TRUE windowed mode</h3>
+            <p data-t="f1_d">Not fake borderless — a real windowed mode at any resolution, even 4K and ultrawide.</p>
         </div>
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
-            <h3 data-t="f2_title">Cursor clipping</h3>
-            <p data-t="f2_desc">Mouse stays locked inside the game window. No more accidental clicks on your second monitor.</p>
+            <h3 data-t="f2_t">Toggleable cursor lock</h3>
+            <p data-t="f2_d">Lock the mouse inside the window when you want to, unlock it instantly when you need your second monitor.</p>
         </div>
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-6 4 4 5-8"/></svg></div>
-            <h3 data-t="f3_title">In-game overlay</h3>
-            <p data-t="f3_desc">FPS, GPU temp, GPU usage, session time. Shift+F1 to toggle. Draggable, persistent.</p>
+            <h3 data-t="f3_t">In-game overlay</h3>
+            <p data-t="f3_d">FPS, GPU temp, GPU usage, session time. Shift+F1 to toggle. Draggable and persistent.</p>
         </div>
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <h3 data-t="f4_title">Live changes</h3>
-            <p data-t="f4_desc">Change resolution, borderless, centering while playing. Zero restart required.</p>
+            <h3 data-t="f4_t">Live changes</h3>
+            <p data-t="f4_d">Change resolution, borderless, centering while the game is running. No restart.</p>
         </div>
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10"/><path d="M20.49 15a9 9 0 01-14.85 3.36L1 14"/></svg></div>
-            <h3 data-t="f5_title">Built-in auto-updater</h3>
-            <p data-t="f5_desc">One-click updates. New games added free, no reinstall needed.</p>
+            <h3 data-t="f5_t">Built-in auto-updater</h3>
+            <p data-t="f5_d">One-click updates. New games added free, no reinstall needed.</p>
         </div>
         <div class="feature-card">
             <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-            <h3 data-t="f6_title">8 languages</h3>
-            <p data-t="f6_desc">EN, FR, ES, DE, IT, PT, RU, PL. Auto-detects your Windows language.</p>
+            <h3 data-t="f6_t">8 languages</h3>
+            <p data-t="f6_d">EN, FR, ES, DE, IT, PT, RU, PL. Auto-detects your Windows language.</p>
         </div>
     </div>
 </section>
 
-<style>
-    .grad-text {
-        background: var(--gradient); -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .feature-card {
-        background: var(--surface); padding: 32px 28px; border-radius: 16px;
-        border: 1px solid var(--border); transition: all 0.3s ease;
-    }
-    .feature-card:hover {
-        border-color: var(--border-strong); transform: translateY(-4px);
-        background: var(--surface-hover);
-    }
-    .feat-icon {
-        width: 44px; height: 44px; border-radius: 10px;
-        background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(34,211,238,0.2));
-        border: 1px solid rgba(124,58,237,0.3);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--accent-2); margin-bottom: 20px;
-    }
-    .feat-icon svg { width: 22px; height: 22px; }
-    .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-    .feature-card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
-</style>
-
-<!-- GAMES SECTION -->
-<section id="games" style="padding: 80px 20px 120px;">
-    <h2 style="font-size: clamp(2rem, 4vw, 3rem); text-align: center; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 20px;">
-        <span data-t="g_title1">6 games,</span>
-        <span class="grad-text" data-t="g_title2">zero hassle.</span>
-    </h2>
-    <p style="text-align: center; color: var(--text-dim); max-width: 600px; margin: 0 auto 60px; font-size: 1.1rem;" data-t="g_sub">
-        Curated for quality. More added regularly via auto-updater.
-    </p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto;">
+<section id="games">
+    <h2><span data-t="g_t1">6 games supported,</span> <span class="grad" data-t="g_t2">zero hassle.</span></h2>
+    <p class="sub" data-t="g_sub">Curated for quality. More added regularly via the built-in auto-updater.</p>
+    <div class="games-grid">
         <div class="game-item">
             <div class="game-tag">4A Engine</div>
             <h3>Metro 2033 Redux</h3>
-            <p data-t="g_metro_desc">Custom resolution, borderless, cursor clipping</p>
+            <p data-t="g_metro">Custom resolution, borderless, cursor lock</p>
         </div>
         <div class="game-item">
             <div class="game-tag">4A Engine</div>
             <h3>Metro Last Light Redux</h3>
-            <p data-t="g_metro_desc">Custom resolution, borderless, cursor clipping</p>
+            <p data-t="g_metro">Custom resolution, borderless, cursor lock</p>
         </div>
         <div class="game-item featured">
-            <div class="game-tag exclusive" data-t="g_exclusive">Exclusive fix</div>
+            <div class="game-tag exclusive" data-t="g_excl">Exclusive fix</div>
             <h3>Metro Exodus</h3>
-            <p data-t="g_exodus_desc">DX11 swap + cfg lockdown. The only working windowed fix.</p>
+            <p data-t="g_exodus">DX11 swap + cfg lockdown. The only reliable windowed fix.</p>
         </div>
         <div class="game-item">
             <div class="game-tag">RE Engine</div>
             <h3>Resident Evil 2 Remake</h3>
-            <p data-t="g_re_desc">Borderless + cursor clipping</p>
+            <p data-t="g_re">Borderless + cursor lock</p>
         </div>
         <div class="game-item">
             <div class="game-tag">RE Engine</div>
             <h3>Resident Evil 3 Remake</h3>
-            <p data-t="g_re_desc">Borderless + cursor clipping</p>
+            <p data-t="g_re">Borderless + cursor lock</p>
         </div>
         <div class="game-item">
             <div class="game-tag">RE Engine</div>
             <h3>Resident Evil 4 Remake</h3>
-            <p data-t="g_re_desc">Borderless + cursor clipping</p>
+            <p data-t="g_re">Borderless + cursor lock</p>
         </div>
     </div>
 </section>
 
-<style>
-    .game-item {
-        background: var(--surface); padding: 24px; border-radius: 14px;
-        border: 1px solid var(--border); transition: all 0.3s;
-        position: relative;
-    }
-    .game-item:hover {
-        border-color: var(--accent); transform: translateY(-3px);
-    }
-    .game-item.featured {
-        background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(34,211,238,0.05));
-        border-color: rgba(124,58,237,0.3);
-    }
-    .game-tag {
-        display: inline-block; background: rgba(255,255,255,0.05);
-        color: var(--text-dim); padding: 3px 10px; border-radius: 100px;
-        font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
-        text-transform: uppercase; margin-bottom: 12px;
-        font-family: 'JetBrains Mono', monospace;
-    }
-    .game-tag.exclusive {
-        background: linear-gradient(90deg, rgba(124,58,237,0.2), rgba(34,211,238,0.2));
-        color: var(--accent-2); border: 1px solid rgba(34,211,238,0.3);
-    }
-    .game-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
-    .game-item p { color: var(--text-dim); font-size: 0.9rem; }
-</style>
-
-<!-- FINAL CTA -->
-<section style="padding: 100px 20px; text-align: center; position: relative;">
-    <div style="max-width: 720px; margin: 0 auto; background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(34,211,238,0.08)); border: 1px solid rgba(124,58,237,0.2); border-radius: 24px; padding: 60px 40px;">
-        <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px;">
-            <span data-t="final_t1">Ready to fix</span>
-            <span class="grad-text" data-t="final_t2">your games?</span>
-        </h2>
-        <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 36px;" data-t="final_sub">
-            One-time $4.99. Lifetime updates. 30-day money back.
-        </p>
-        <a href="https://alphakiir.gumroad.com/l/screenforge" class="btn btn-primary" target="_blank" rel="noopener" style="font-size: 1.05rem; padding: 16px 36px;">
+<section>
+    <div class="cta-box">
+        <h2><span data-t="final_t1">Ready to fix</span> <span class="grad" data-t="final_t2">your games?</span></h2>
+        <p data-t="final_sub">One-time $4.99. Lifetime updates. 30-day money back.</p>
+        <a href="https://alphakiir.gumroad.com/l/screenforge" class="btn btn-primary" target="_blank" rel="noopener" style="font-size: 1rem; padding: 15px 32px;">
             <span data-t="final_cta">Get ScreenForge</span>
             <span class="price">$4.99</span>
         </a>
-        <div style="margin-top: 24px; color: var(--text-faint); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
-            Windows 10 / 11 · 29 MB · <span data-t="final_download">Instant download</span>
-        </div>
+        <div class="info">Windows 10 / 11 · 29 MB · <span data-t="final_dl">Instant download</span></div>
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer style="padding: 60px 20px 40px; border-top: 1px solid var(--border); text-align: center; color: var(--text-faint);">
-    <div style="max-width: 900px; margin: 0 auto;">
-        <div style="margin-bottom: 20px;">
-            <span class="grad-text" style="font-weight: 800; font-size: 18px; letter-spacing: -0.5px;">ScreenForge</span>
-            <span style="color: var(--text-faint); font-size: 13px; margin-left: 8px;">v2.1</span>
-        </div>
-        <div style="display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
-            <a href="roadmap.html" style="color: var(--text-dim); text-decoration: none; font-size: 14px;" data-t="foot_roadmap">Roadmap</a>
-            <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" style="color: var(--text-dim); text-decoration: none; font-size: 14px;" data-t="foot_buy">Buy</a>
-            <a href="https://alphakiir.gumroad.com" target="_blank" style="color: var(--text-dim); text-decoration: none; font-size: 14px;">Gumroad</a>
-        </div>
-        <p style="font-size: 12px;">© 2026 AlphaKiir. <span data-t="foot_note">Not affiliated with 4A Games, Deep Silver, or Capcom.</span></p>
+<footer>
+    <div class="logo">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.1</span></div>
+    <div class="links">
+        <a href="roadmap.html" data-t="foot_rm">Roadmap</a>
+        <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" data-t="foot_buy">Buy</a>
+        <a href="https://alphakiir.gumroad.com" target="_blank">Gumroad</a>
     </div>
+    <p class="note">© 2026 AlphaKiir. <span data-t="foot_note">Not affiliated with 4A Games, Deep Silver, or Capcom.</span></p>
 </footer>
 
 <script>
 const translations = {
     fr: {
         nav_features: "Fonctionnalités", nav_games: "Jeux", nav_roadmap: "Roadmap", nav_buy: "Acheter",
-        pill_new: "v2.1 — Mises à jour auto intégrées",
+        pill_new: "v2.1 — Auto-updater intégré",
         h1_line1: "Arrête de te battre", h1_line2: "avec le mode fenêtré.",
-        tagline: "ScreenForge force un VRAI mode fenêtré dans Metro et Resident Evil. Résolution custom, souris verrouillée, overlay en jeu — en un clic.",
-        cta_buy: "Obtenir ScreenForge", cta_learn: "Comment ça marche →",
+        tagline: "Vrai mode fenêtré dans Metro & Resident Evil. Résolution custom, souris verrouillable, overlay en jeu — un clic.",
+        cta_buy: "Obtenir ScreenForge", cta_learn: "Fonctionnalités →",
         trust_lifetime: "Mises à jour à vie", trust_money: "Remboursement 30 jours",
-        mock_sub: "Fix mode fenêtré pour vos jeux PC · Écran : 5120 × 1440",
-        mock_g1: "Metro 2033 Redux", mock_g2: "Metro Exodus", mock_g3: "Resident Evil 2", mock_g4: "Resident Evil 4",
-        mock_res: "Résolution", mock_border: "Sans bordures", mock_center: "Centrage auto", mock_cursor: "Souris verrouillée",
-        mock_launch: "▶ LANCER LE JEU",
-        feat_title1: "Tout ce qu'il te faut.", feat_title2: "Rien de superflu.",
-        feat_sub: "Six fonctionnalités ciblées. Pour résoudre les vrais problèmes PC, pas pour en ajouter.",
-        f1_title: "Mode fenêtré VRAI",
-        f1_desc: "Pas juste sans bordures. Un vrai mode fenêtré à toute résolution — même en 4K et ultrawide.",
-        f2_title: "Souris verrouillée",
-        f2_desc: "La souris reste dans la fenêtre du jeu. Plus de clics accidentels sur le second écran.",
-        f3_title: "Overlay en jeu",
-        f3_desc: "FPS, température GPU, usage GPU, temps de session. Shift+F1. Déplaçable, persistant.",
-        f4_title: "Modifications en direct",
-        f4_desc: "Change résolution, bordures, centrage pendant que tu joues. Aucun redémarrage.",
-        f5_title: "Auto-updater intégré",
-        f5_desc: "Mises à jour en un clic. Nouveaux jeux gratuits, sans réinstallation.",
-        f6_title: "8 langues",
-        f6_desc: "EN, FR, ES, DE, IT, PT, RU, PL. Détecte ta langue Windows automatiquement.",
-        g_title1: "6 jeux,", g_title2: "zéro galère.",
-        g_sub: "Sélection qualité. De nouveaux jeux ajoutés régulièrement via l'auto-updater.",
-        g_metro_desc: "Résolution custom, sans bordures, souris verrouillée",
-        g_exclusive: "Fix exclusif",
-        g_exodus_desc: "DX11 swap + lockdown cfg. Le seul fix fenêtré qui marche.",
-        g_re_desc: "Sans bordures + souris verrouillée",
+        feat_t1: "Tout ce qu'il te faut.", feat_t2: "Rien de superflu.",
+        feat_sub: "Six fonctionnalités pour résoudre les vrais problèmes PC.",
+        f1_t: "Mode fenêtré VRAI",
+        f1_d: "Pas juste sans bordures — un vrai mode fenêtré à toute résolution, même 4K et ultrawide.",
+        f2_t: "Souris verrouillable",
+        f2_d: "Verrouille la souris dans la fenêtre quand tu veux, déverrouille-la instantanément quand tu as besoin du second écran.",
+        f3_t: "Overlay en jeu",
+        f3_d: "FPS, température GPU, usage GPU, temps de session. Shift+F1. Déplaçable et persistant.",
+        f4_t: "Modifications en direct",
+        f4_d: "Change résolution, bordures, centrage pendant que le jeu tourne. Aucun redémarrage.",
+        f5_t: "Auto-updater intégré",
+        f5_d: "Mises à jour en un clic. Nouveaux jeux gratuits, sans réinstallation.",
+        f6_t: "8 langues",
+        f6_d: "EN, FR, ES, DE, IT, PT, RU, PL. Détecte ta langue Windows automatiquement.",
+        g_t1: "6 jeux supportés,", g_t2: "zéro galère.",
+        g_sub: "Sélection qualité. De nouveaux jeux ajoutés régulièrement via l'auto-updater intégré.",
+        g_metro: "Résolution custom, sans bordures, souris verrouillable",
+        g_excl: "Fix exclusif",
+        g_exodus: "DX11 swap + lockdown cfg. Le seul fix fenêtré fiable.",
+        g_re: "Sans bordures + souris verrouillable",
         final_t1: "Prêt à fixer", final_t2: "tes jeux ?",
         final_sub: "Achat unique 4,99 $. Mises à jour à vie. Remboursement 30 jours.",
-        final_cta: "Obtenir ScreenForge",
-        final_download: "Téléchargement instantané",
-        foot_roadmap: "Roadmap", foot_buy: "Acheter",
+        final_cta: "Obtenir ScreenForge", final_dl: "Téléchargement instantané",
+        foot_rm: "Roadmap", foot_buy: "Acheter",
         foot_note: "Non affilié à 4A Games, Deep Silver ou Capcom."
     }
 };
