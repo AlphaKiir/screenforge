@@ -238,7 +238,7 @@ footer .note { font-size: 12px; }
 
 <section class="hero">
     <div class="wordmark">ScreenForge</div>
-    <div class="pill" data-t="pill_new">v2.1 — Built-in auto-updater</div>
+    <div class="pill" data-t="pill_new">v2.2 — Metro Exodus Enhanced + redesigned UI</div>
     <h1>
         <span data-t="h1_line1">Stop fighting</span><br>
         <span class="highlight" data-t="h1_line2">with windowed mode.</span>
@@ -296,7 +296,7 @@ footer .note { font-size: 12px; }
 </section>
 
 <section id="games">
-    <h2><span data-t="g_t1">6 games supported,</span> <span class="grad" data-t="g_t2">zero hassle.</span></h2>
+    <h2><span data-t="g_t1">7 games supported,</span> <span class="grad" data-t="g_t2">zero hassle.</span></h2>
     <p class="sub" data-t="g_sub">Curated for quality. More added regularly via the built-in auto-updater.</p>
     <div class="games-grid">
         <div class="game-item">
@@ -313,6 +313,11 @@ footer .note { font-size: 12px; }
             <div class="game-tag exclusive" data-t="g_excl">Exclusive fix</div>
             <h3>Metro Exodus</h3>
             <p data-t="g_exodus">DX11 swap + cfg lockdown. The only reliable windowed fix.</p>
+        </div>
+        <div class="game-item featured">
+            <div class="game-tag" style="background: rgba(34,211,238,0.1); color: var(--accent-2); border: 1px solid rgba(34,211,238,0.2);">4A Engine · DX12</div>
+            <h3>Metro Exodus Enhanced</h3>
+            <p data-t="g_exodus_ee">Adapted fix for DX12 / RTX version. Added in v2.2.</p>
         </div>
         <div class="game-item">
             <div class="game-tag">RE Engine</div>
@@ -348,7 +353,7 @@ footer .note { font-size: 12px; }
 </section>
 
 <footer>
-    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.1</span></div>
+    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.2</span></div>
     <div class="links">
         <a href="roadmap.html" data-t="foot_rm">Roadmap</a>
         <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" data-t="foot_buy">Buy</a>
@@ -361,7 +366,7 @@ footer .note { font-size: 12px; }
 const translations = {
     fr: {
         nav_features: "Fonctionnalités", nav_games: "Jeux", nav_roadmap: "Roadmap", nav_buy: "Acheter",
-        pill_new: "v2.1 — Auto-updater intégré",
+        pill_new: "v2.2 — Metro Exodus Enhanced + UI redesignée",
         h1_line1: "Arrête de te battre", h1_line2: "avec le mode fenêtré.",
         tagline: "Vrai mode fenêtré dans Metro & Resident Evil. Résolution custom, souris verrouillable, overlay en jeu — un clic.",
         cta_buy: "Obtenir ScreenForge", cta_learn: "Fonctionnalités →",
@@ -374,11 +379,12 @@ const translations = {
         f4_t: "Modifications en direct", f4_d: "Change résolution, bordures, centrage pendant que le jeu tourne. Aucun redémarrage.",
         f5_t: "Auto-updater intégré", f5_d: "Mises à jour en un clic. Nouveaux jeux gratuits, sans réinstallation.",
         f6_t: "8 langues", f6_d: "EN, FR, ES, DE, IT, PT, RU, PL. Détecte ta langue Windows automatiquement.",
-        g_t1: "6 jeux supportés,", g_t2: "zéro galère.",
+        g_t1: "7 jeux supportés,", g_t2: "zéro galère.",
         g_sub: "Sélection qualité. De nouveaux jeux ajoutés régulièrement via l'auto-updater intégré.",
         g_metro: "Résolution custom, sans bordures, souris verrouillable",
         g_excl: "Fix exclusif",
         g_exodus: "DX11 swap + lockdown cfg. Le seul fix fenêtré fiable.",
+        g_exodus_ee: "Fix adapté pour la version DX12 / RTX. Ajouté en v2.2.",
         g_re: "Sans bordures + souris verrouillable",
         see_roadmap: "Voir la roadmap →",
         final_t1: "Prêt à fixer", final_t2: "tes jeux ?",
@@ -414,3 +420,4 @@ document.querySelectorAll('.lang-switch button').forEach(btn => { btn.addEventLi
 </script>
 </body>
 </html>
+
