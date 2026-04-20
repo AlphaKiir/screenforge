@@ -268,7 +268,7 @@ footer .note { font-size: 12px; }
 
 <section>
     <div class="status-label live" data-t="status_live">LIVE · Currently supported</div>
-    <h2 class="rm-title" data-t="live_title">6 games ready to play</h2>
+    <h2 class="rm-title" data-t="live_title">7 games ready to play</h2>
     <p class="rm-subtitle" data-t="live_sub">Fully tested, optimized, and included in every ScreenForge purchase.</p>
 
     <div class="game-grid">
@@ -286,6 +286,11 @@ footer .note { font-size: 12px; }
             <div class="game-tag exclusive" data-t="g_excl">Exclusive fix</div>
             <h3>Metro Exodus</h3>
             <p data-t="g_exodus">DX11 swap + cfg lockdown. The only reliable windowed fix.</p>
+        </div>
+        <div class="game-item featured">
+            <div class="game-tag engine-new">4A Engine · DX12</div>
+            <h3>Metro Exodus Enhanced Edition</h3>
+            <p data-t="g_exodus_ee_live">Adapted fix for DX12 / RTX version. Added in v2.2.</p>
         </div>
         <div class="game-item">
             <div class="game-tag">RE Engine</div>
@@ -308,14 +313,14 @@ footer .note { font-size: 12px; }
 <section>
     <div class="status-label soon" data-t="status_soon">COMING SOON · In development</div>
     <h2 class="rm-title" data-t="soon_title">Next games in queue</h2>
-    <p class="rm-subtitle" data-t="soon_sub">Being integrated and tested. Will ship automatically via auto-updater when ready.</p>
+    <p class="rm-subtitle" data-t="soon_sub">New games are being evaluated and integrated based on community requests. Will ship automatically via auto-updater when ready.</p>
 
     <div class="game-grid">
         <div class="game-item soon">
-            <div class="game-tag engine-new">4A Engine · DX12</div>
-            <h3>Metro Exodus Enhanced Edition</h3>
-            <p data-t="g_exodus_ee">Adapted fix for DX12 / RTX version. Separate Steam app.</p>
-            <span class="game-eta" data-t="eta_next">◎ Next release</span>
+            <div class="game-tag engine-new" data-t="g_tbd_tag">Community-driven</div>
+            <h3 data-t="g_tbd_title">Your suggestion here?</h3>
+            <p data-t="g_tbd_desc">The next supported games are chosen based on real player demand. Got a game with windowed-mode issues? Let me know.</p>
+            <span class="game-eta" data-t="eta_tbd">◎ Based on requests</span>
         </div>
     </div>
 </section>
@@ -340,7 +345,7 @@ footer .note { font-size: 12px; }
 </section>
 
 <footer>
-    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.1</span></div>
+    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.2</span></div>
     <div class="links">
         <a href="index.html" data-t="foot_home">Home</a>
         <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" data-t="foot_buy">Buy</a>
@@ -357,17 +362,20 @@ const translations = {
         rm_title: "Roadmap",
         rm_sub: "Jeux supportés et ce qui arrive. Tout est livré automatiquement aux clients existants via l'auto-updater intégré.",
         status_live: "LIVE · Actuellement supportés",
-        live_title: "6 jeux prêts à jouer",
+        live_title: "7 jeux prêts à jouer",
         live_sub: "Entièrement testés, optimisés, et inclus dans chaque achat ScreenForge.",
         g_metro: "Mode fenêtré + résolution custom",
         g_excl: "Fix exclusif",
         g_exodus: "DX11 swap + lockdown cfg. Le seul fix fenêtré fiable.",
+        g_exodus_ee_live: "Fix adapté pour la version DX12 / RTX. Ajouté en v2.2.",
         g_re: "Fenêtre sans bordures + souris verrouillée",
         status_soon: "BIENTÔT · En développement",
         soon_title: "Prochains jeux en file",
-        soon_sub: "En cours d'intégration et de test. Seront livrés automatiquement via l'auto-updater quand prêts.",
-        g_exodus_ee: "Fix adapté pour la version DX12 / RTX. App Steam séparée.",
-        eta_next: "◎ Prochaine sortie",
+        soon_sub: "De nouveaux jeux sont évalués et intégrés selon les demandes de la communauté. Seront livrés automatiquement via l'auto-updater quand prêts.",
+        g_tbd_tag: "Demande communauté",
+        g_tbd_title: "Ta suggestion ici ?",
+        g_tbd_desc: "Les prochains jeux supportés sont choisis selon la demande réelle des joueurs. Tu connais un jeu avec des soucis de mode fenêtré ? Dis-le moi.",
+        eta_tbd: "◎ Selon les demandes",
         sug_t1: "Tu connais un jeu avec", sug_t2: "des soucis de mode fenêtré ?",
         sug_desc: "Je priorise les nouveaux jeux selon la demande réelle des joueurs. Si tu tombes sur un jeu bloqué en borderless fullscreen ou qui refuse de passer en fenêtré, dis-le moi.",
         sug_cta: "Suggérer un jeu →",
@@ -404,3 +412,4 @@ document.querySelectorAll('.lang-switch button').forEach(btn => { btn.addEventLi
 </script>
 </body>
 </html>
+
