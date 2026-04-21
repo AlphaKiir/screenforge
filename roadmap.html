@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -261,15 +261,39 @@ footer .note { font-size: 12px; }
 </nav>
 
 <section class="hero-rm">
-    <div class="pill" data-t="pill_rm">Roadmap · Updated regularly</div>
+    <div class="pill" data-t="pill_rm">Roadmap · v3.0 released</div>
     <h1><span class="grad" data-t="rm_title">Roadmap</span></h1>
     <p data-t="rm_sub">Supported games and what's coming next. Everything ships automatically to existing owners via built-in auto-update.</p>
 </section>
 
 <section>
-    <div class="status-label live" data-t="status_live">LIVE · Currently supported</div>
-    <h2 class="rm-title" data-t="live_title">7 games ready to play</h2>
-    <p class="rm-subtitle" data-t="live_sub">Fully tested, optimized, and included in every ScreenForge purchase.</p>
+    <div class="status-label live" style="background: rgba(124, 58, 237, 0.1); color: var(--accent); border-color: rgba(124, 58, 237, 0.3);">NEW IN v3 · Universal support</div>
+    <h2 class="rm-title" data-t="v3_title">Auto-detect any installed game</h2>
+    <p class="rm-subtitle" data-t="v3_sub">Since v3.0, ScreenForge scans your Steam, Epic Games, GOG and custom folders to detect any PC game. Works with Unity, Unreal Engine 5, Source, Godot, CryEngine and more.</p>
+
+    <div class="game-grid">
+        <div class="game-item featured">
+            <div class="game-tag exclusive" data-t="v3_scan_tag">Scanner auto</div>
+            <h3 data-t="v3_scan_title">Steam · Epic · Custom folders</h3>
+            <p data-t="v3_scan_desc">Detects installed games from Steam libraries (all drives), Epic Games manifests, GOG Galaxy, Ubisoft Connect and custom roots (D:\Games, etc).</p>
+        </div>
+        <div class="game-item featured">
+            <div class="game-tag engine-new" data-t="v3_engines_tag">6+ engines</div>
+            <h3 data-t="v3_engines_title">Universal engine support</h3>
+            <p data-t="v3_engines_desc">Unity, Unreal Engine 4 & 5, Source, Godot, CryEngine, RE Engine, 4A Engine. Borderless + resolution + cursor clipping work out of the box.</p>
+        </div>
+        <div class="game-item featured">
+            <div class="game-tag" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-3); border: 1px solid rgba(16, 185, 129, 0.2);" data-t="v3_overlay_tag">In-game overlay</div>
+            <h3 data-t="v3_overlay_title">Live resolution + options</h3>
+            <p data-t="v3_overlay_desc">Change resolution in real time from the overlay (Shift+F1). Toggle borderless, cursor lock, center window, and view FPS/GPU stats.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="status-label live" data-t="status_live">LIVE · Pre-tuned profiles</div>
+    <h2 class="rm-title" data-t="live_title">7 games with dedicated fixes</h2>
+    <p class="rm-subtitle" data-t="live_sub">These games get extra love: custom config patching, engine-specific tweaks, and cinematic support. Included in every ScreenForge purchase.</p>
 
     <div class="game-grid">
         <div class="game-item">
@@ -345,7 +369,7 @@ footer .note { font-size: 12px; }
 </section>
 
 <footer>
-    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v2.2</span></div>
+    <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v3.0</span></div>
     <div class="links">
         <a href="index.html" data-t="foot_home">Home</a>
         <a href="https://alphakiir.gumroad.com/l/screenforge" target="_blank" data-t="foot_buy">Buy</a>
@@ -358,12 +382,23 @@ footer .note { font-size: 12px; }
 const translations = {
     fr: {
         nav_back: "← Accueil", nav_buy: "Acheter",
-        pill_rm: "Roadmap · Mise à jour régulièrement",
+        pill_rm: "Roadmap · v3.0 disponible",
         rm_title: "Roadmap",
         rm_sub: "Jeux supportés et ce qui arrive. Tout est livré automatiquement aux clients existants via l'auto-updater intégré.",
-        status_live: "LIVE · Actuellement supportés",
-        live_title: "7 jeux prêts à jouer",
-        live_sub: "Entièrement testés, optimisés, et inclus dans chaque achat ScreenForge.",
+        v3_title: "Détection auto de tous tes jeux installés",
+        v3_sub: "Depuis la v3.0, ScreenForge scanne Steam, Epic Games, GOG et tes dossiers custom pour détecter tout jeu PC. Fonctionne avec Unity, Unreal Engine 5, Source, Godot, CryEngine et plus.",
+        v3_scan_tag: "Scanner auto",
+        v3_scan_title: "Steam · Epic · Dossiers custom",
+        v3_scan_desc: "Détecte les jeux installés dans Steam (tous disques), Epic Games, GOG Galaxy, Ubisoft Connect et dossiers custom (D:\\Games, etc).",
+        v3_engines_tag: "6+ moteurs",
+        v3_engines_title: "Support universel des moteurs",
+        v3_engines_desc: "Unity, Unreal Engine 4 & 5, Source, Godot, CryEngine, RE Engine, 4A Engine. Bordures, résolution et curseur fonctionnent direct.",
+        v3_overlay_tag: "Overlay en jeu",
+        v3_overlay_title: "Résolution live + options",
+        v3_overlay_desc: "Change la résolution en direct depuis l'overlay (Shift+F1). Toggle bordures, verrouillage souris, centrage + stats FPS/GPU.",
+        status_live: "LIVE · Profils pré-réglés",
+        live_title: "7 jeux avec fixes dédiés",
+        live_sub: "Ces jeux ont droit à un traitement spécial : patching config custom, tweaks spécifiques au moteur, support des cinématiques. Inclus dans chaque achat ScreenForge.",
         g_metro: "Mode fenêtré + résolution custom",
         g_excl: "Fix exclusif",
         g_exodus: "DX11 swap + lockdown cfg. Le seul fix fenêtré fiable.",
@@ -412,4 +447,5 @@ document.querySelectorAll('.lang-switch button').forEach(btn => { btn.addEventLi
 </script>
 </body>
 </html>
+
 
