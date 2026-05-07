@@ -31,7 +31,7 @@ Includes a **Shift+F1 in-game overlay** with real-time FPS stats — works on to
 
 | Game | Notes |
 |------|-------|
-| **Metro Exodus** | Auto-edits user.cfg (r_fullscreen) |
+| **Metro Exodus** | Auto-edits user.cfg |
 | **Metro Exodus Enhanced Edition** | Auto-edits user.cfg |
 | **Metro 2033 Redux** | Auto-edits user.cfg |
 | **Metro Last Light Redux** | Auto-edits user.cfg |
@@ -43,7 +43,6 @@ Includes a **Shift+F1 in-game overlay** with real-time FPS stats — works on to
 | **LEGO Marvel Super Heroes 2** | DX9 proxy method |
 | **LEGO Indiana Jones** | DX9 proxy method |
 | **LEGO The Lord of the Rings** | DX9 proxy method |
-| **S.T.A.L.K.E.R. 2: Heart of Chornobyl** | Auto-edits config |
 | **Elden Ring** | Auto-edits config |
 | **Final Fantasy XIV** | Auto-edits config |
 | **Honkai: Star Rail** | Auto-edits config |
@@ -54,13 +53,12 @@ More games added with each update.
 
 ## Features
 
-- One-click borderless windowed mode for 18+ games
+- One-click borderless windowed mode for 15+ games
 - Automatically edits game config files — no manual work
 - Prevents games from reverting to fullscreen
 - **Shift+F1 overlay** with FPS, resolution and game options
 - Multi-monitor support — cursor moves freely between screens
 - Works alongside Discord, OBS, streaming software
-- Compatible with anti-cheat games
 - Windows 10 / 11
 
 ---
@@ -74,10 +72,10 @@ More games added with each update.
 ## FAQ
 
 **Metro Exodus doesn't have a borderless option — how does ScreenForge fix it?**
-ScreenForge edits the user.cfg file directly, changing _fullscreen on to _fullscreen off, then applies the borderless window style automatically.
+ScreenForge edits the `user.cfg` file directly, changing `r_fullscreen on` to `r_fullscreen off`, then applies the borderless window style.
 
 **LEGO Star Wars TCS reverts to fullscreen — how is this fixed?**
-Old LEGO games use DirectX 9 and don't respect config changes at launch. ScreenForge uses a DX9 proxy method that intercepts the fullscreen call and overrides it with borderless windowed.
+Old LEGO games use DirectX 9 and don't respect config changes at launch. ScreenForge uses a DX9 proxy that intercepts the fullscreen call and overrides it with borderless windowed.
 
 **Does it work with anti-cheat (EAC, BattlEye)?**
 Yes — ScreenForge only modifies config files and window styles. It does not inject into game processes.
