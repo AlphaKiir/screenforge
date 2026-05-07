@@ -244,6 +244,45 @@ footer .note { font-size: 12px; }
     </div>
 </section>
 
+
+<!-- FAQ section — aide le SEO Google pour les requetes de type "how to fix metro exodus borderless" -->
+<section id="faq" style="max-width:800px;margin:0 auto;padding:60px 20px">
+<h2 style="font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:8px;text-align:center">Frequently Asked Questions</h2>
+<p style="text-align:center;color:var(--text-dim);margin-bottom:40px">Common problems ScreenForge solves</p>
+<div itemscope itemtype="https://schema.org/FAQPage">
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">Metro Exodus has no borderless windowed option — how to fix it?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Metro Exodus uses the 4A Engine which forces exclusive fullscreen. ScreenForge automatically edits the <code>user.cfg</code> config file, changing <code>r_fullscreen on</code> to <code>r_fullscreen off</code>, then removes the window borders so it fills the screen. Works for Metro Exodus, Metro Exodus Enhanced Edition, Metro 2033 Redux, and Metro Last Light Redux.</p></div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">LEGO Star Wars: The Complete Saga keeps reverting to fullscreen — how to force windowed mode?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Old LEGO games use DirectX 9 and overwrite config changes on every launch. ScreenForge uses a DX9 proxy (d3d9.dll) that intercepts the fullscreen call at startup and overrides it with borderless windowed mode — no config editing needed, and the game can't revert it.</p></div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">Discord overlay doesn't show in fullscreen games — how to fix?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Discord overlay only works in windowed and borderless windowed mode. Exclusive fullscreen blocks it completely. ScreenForge converts your game from exclusive fullscreen to borderless windowed, so Discord overlay, OBS, and streaming software all work instantly.</p></div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">Game crashes or freezes when alt-tabbing — how to fix?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Alt-tab crashes happen because exclusive fullscreen takes over your entire GPU output. Switching windows forces a full GPU mode reset, causing freezes or crashes. ScreenForge puts your game in borderless windowed mode — alt-tab becomes instant, just like switching between any two windows.</p></div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">Does ScreenForge work with Resident Evil 2, 3 and 4 Remake?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Yes. ScreenForge has pre-configured profiles for Resident Evil 2 Remake, Resident Evil 3 Remake, and Resident Evil 4 Remake. It automatically edits their config files and applies borderless windowed mode in one click.</p></div>
+</div>
+
+<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:12px;background:var(--surface)">
+<h3 itemprop="name" style="font-size:1rem;font-weight:700;margin-bottom:10px">Does it work with anti-cheat (EAC, BattlEye)?</h3>
+<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="color:var(--text-dim);font-size:0.92rem;line-height:1.6">Yes. ScreenForge only modifies config files and applies a standard Windows borderless window style. It does not inject code into game processes, does not modify game memory, and does not hook into anti-cheat systems.</p></div>
+</div>
+
+</div>
+</section>
 <footer>
     <div class="logo-foot">ScreenForge <span style="color: var(--text-faint); font-size: 13px; font-weight: 400; -webkit-text-fill-color: var(--text-faint);">v3.2</span></div>
     <div class="links">
