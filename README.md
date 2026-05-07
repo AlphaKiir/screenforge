@@ -11,19 +11,11 @@
 Exclusive fullscreen mode causes:
 - Alt-tab freezes or crashes the game
 - Discord overlay not showing
-- OBS/streaming software can't capture properly
+- OBS/streaming software cant capture properly
 - Game minimizes randomly
-- Can't move mouse to second monitor
+- Cant move mouse to second monitor
 
 ScreenForge eliminates exclusive fullscreen in **one click**.
-
----
-
-## How it works
-
-ScreenForge detects your game, automatically finds and edits its config file, then applies borderless windowed mode. It also prevents the game from reverting to fullscreen on next launch.
-
-Includes a **Shift+F1 in-game overlay** with real-time FPS stats — works on top of any game like Discord's overlay.
 
 ---
 
@@ -39,26 +31,22 @@ Includes a **Shift+F1 in-game overlay** with real-time FPS stats — works on to
 | **Resident Evil 3 Remake** | Auto-edits config |
 | **Resident Evil 4 Remake** | Auto-edits config |
 | **LEGO Star Wars: The Complete Saga** | DX9 proxy method |
-| **LEGO Marvel Super Heroes** | DX9 proxy method |
-| **LEGO Marvel Super Heroes 2** | DX9 proxy method |
-| **LEGO Indiana Jones** | DX9 proxy method |
 | **LEGO The Lord of the Rings** | DX9 proxy method |
-| **Elden Ring** | Auto-edits config |
-| **Final Fantasy XIV** | Auto-edits config |
-| **Honkai: Star Rail** | Auto-edits config |
-
-More games added with each update.
+| **LEGO Indiana Jones** | DX9 proxy method |
+| **LEGO Marvel Super Heroes** | DX9 proxy method |
+| **CS2 (Counter-Strike 2)** | Auto-edits config |
+| **Warframe** | Auto-edits config |
 
 ---
 
 ## Features
 
-- One-click borderless windowed mode for 15+ games
-- Automatically edits game config files — no manual work
+- One-click borderless windowed mode for 13 games
+- Automatically edits game config files
 - Prevents games from reverting to fullscreen
-- **Shift+F1 overlay** with FPS, resolution and game options
-- Multi-monitor support — cursor moves freely between screens
-- Works alongside Discord, OBS, streaming software
+- **Shift+F1 overlay** with FPS stats
+- Multi-monitor cursor support
+- Discord and OBS compatible
 - Windows 10 / 11
 
 ---
@@ -71,11 +59,11 @@ More games added with each update.
 
 ## FAQ
 
-**Metro Exodus doesn't have a borderless option — how does ScreenForge fix it?**
-ScreenForge edits the `user.cfg` file directly, changing `r_fullscreen on` to `r_fullscreen off`, then applies the borderless window style.
+**Metro Exodus has no borderless option — how does ScreenForge fix it?**
+ScreenForge edits the `user.cfg` file, changing `r_fullscreen on` to `r_fullscreen off`, then applies the borderless window style.
 
 **LEGO Star Wars TCS reverts to fullscreen — how is this fixed?**
-Old LEGO games use DirectX 9 and don't respect config changes at launch. ScreenForge uses a DX9 proxy that intercepts the fullscreen call and overrides it with borderless windowed.
+ScreenForge uses a DX9 proxy that intercepts the fullscreen call at startup. The game cannot revert it.
 
-**Does it work with anti-cheat (EAC, BattlEye)?**
-Yes — ScreenForge only modifies config files and window styles. It does not inject into game processes.
+**Does it work with anti-cheat?**
+Yes — ScreenForge only modifies config files and window styles. No code injection.
